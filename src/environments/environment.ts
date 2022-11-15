@@ -8,8 +8,6 @@ export const environment = {
   apiPassURL: "http://localhost:4005/mk-api/v1/password/",
   apiEmployeeURL: "http://localhost:4005/mk-api/v1/employee/",
   apiJobURL: "http://localhost:4005/mk-api/v1/job/",
-  //apiJobURL: "http://13.115.154.253/mk-api/v1/job/",
-  apiJobtestURL: "http://localhost:4005/mk-api/v1/jobtest/",
   apiAttendanceURL: "http://localhost:4005/mk-api/v1/attendance/"
 
 };
