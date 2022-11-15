@@ -1,0 +1,105 @@
+<p-toast></p-toast>
+<div class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+<div class="card">
+    <form [formGroup]="form">
+    <h5>New User Form</h5>
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <label for="name">Name</label>
+            <input formControlName="name" id="name" type="text" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary">
+            <small *ngIf="employeeForm.name.invalid && isSubmitted" class="p-error">
+                <span *ngIf="employeeForm.name.errors?.required">Name is Mandatory</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="gender">Gender</label>
+            <select formControlName="gender" id="gender" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="dob">Date of Birth</label>
+            <input formControlName="dob" id="dob" type="date" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary">
+            <small *ngIf="employeeForm.dob.invalid && isSubmitted" class="p-error">
+                <span *ngIf="employeeForm.dob.errors?.required">DOB is Mandatory</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="email">Email</label>
+            <input formControlName="email" id="email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            <small *ngIf="employeeForm.email.invalid && isSubmitted" class="p-error">
+                <span *ngIf="employeeForm.email.errors?.required">Email is Mandatory</span>
+                <span *ngIf="employeeForm.email.errors?.email">Email id is Invalid</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="mobile">Mobile</label>
+            <input formControlName="mobile" id="mobile" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12">
+            <label for="address">Address</label>
+            <textarea formControlName="address" id="address" type="text" rows="4" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></textarea>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="city">Town/City</label>
+            <input formControlName="city" id="city" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="state">State</label>
+            <select formControlName="state" id="state" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
+                <option>Tamilnadu</option>
+                <option>Karnataka</option>
+                <option>Kerala</option>
+                <option>AndhraPradesh</option>
+                <option>Other</option>
+            </select>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="zip">Zip</label>
+            <input formControlName="zip" id="zip" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-3">
+            <label for="employeetype">Employee type</label>
+            <p-dropdown [options]="typesarr" formControlName="employeetype" class="text-base surface-overlay p-2 border-1 border-solid" [editable]="true" class="w-full"  id="employeetype" placeholder="Select Employee Type" optionLabel="name" [showClear]="true" >
+            </p-dropdown>
+            <small *ngIf="employeeForm.employeetype.invalid && isSubmitted" class="p-error">
+                <span *ngIf="employeeForm.employeetype.errors?.required">Type is Mandatory</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-3">
+            <label for="salary">Salary</label>
+            <input formControlName="salary" id="salary" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-3">
+            <label for="salary">PF</label>
+            <input formControlName="salary" id="salary" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-3">
+            <label for="cash">Cash Advance</label>
+            <input formControlName="cashadvance" id="cash" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="bank">Bank</label>
+            <input formControlName="bank" id="bank" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="account">Account No</label>
+            <input formControlName="account" id="account" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="ifsc">IFSC Code</label>
+            <input formControlName="ifsccode" id="ifsc" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+    <div class="field col-12 md:col-6">
+        <button (click)="onCancel()" type="button" class="text-white bg-red-700 border-red-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700 w-full">Cancel</button>
+    </div>
+    <div class="field col-12 md:col-6">
+        <button (click)="onSave()" type="button" class="text-white bg-green-700 border-green-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700 w-full">Save</button>
+    </div>
+</div>
+</form>
+</div>
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

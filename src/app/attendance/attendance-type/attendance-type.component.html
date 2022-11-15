@@ -1,0 +1,42 @@
+<p-toast></p-toast>
+<div class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <input placeholder="Attendance type" [(ngModel)]="name" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-4">
+            <input placeholder="Description" [(ngModel)]="description" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-4">
+            <button (click)="onSave()" type="button" class="text-white bg-green-700 border-red-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700  w-full">Save</button>
+        </div>
+
+</div>
+    <div class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+        <div class="card">
+            <p-table [value]="allTypes" styleClass="p-datatable-sm" >
+                <ng-template pTemplate="caption">
+                    Available Attendance Types  
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Modify</th>
+                        <th>Delete</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-type>
+                    <tr>
+                        <td>{{type.name}}</td>
+                        <td>{{type.description}}</td>
+                        <td (click)="modifyType(type)"><button pButton pRipple type="button" icon="pi pi-pencil"  class="p-button-rounded p-button-text"></button></td>
+                        <td (click)="deleteType(type)"><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
