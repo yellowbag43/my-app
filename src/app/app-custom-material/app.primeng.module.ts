@@ -18,6 +18,8 @@ import {DialogModule} from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import {TableModule} from 'primeng/table';
 import { CardModule } from 'primeng/card';
+import { Chip, ChipModule } from 'primeng/chip';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -38,6 +40,7 @@ import { CardModule } from 'primeng/card';
     DropdownModule,
     PasswordModule,
     RadioButtonModule,
+    ChipModule,
   ],
   exports: [
     CommonModule,
@@ -56,7 +59,8 @@ import { CardModule } from 'primeng/card';
     TableModule,
     DropdownModule,
     PasswordModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ChipModule,
   ],
   providers: [MessageService, ConfirmationService],
 
