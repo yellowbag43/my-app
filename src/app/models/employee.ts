@@ -4,6 +4,7 @@ export class Employee {
     name?       : string;
     gender?     : number;
     type?       : number;
+    typestr?    : string;
     mobile?     : string;
     email?      : string;
     address?    : string;
@@ -20,6 +21,6 @@ export class Employee {
 
 export class Employeetype {
     ID?         : number;
-    name        : string;
-    description : string;
+    type?       : string;
+    description? : string;
 }

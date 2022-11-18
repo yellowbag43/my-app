@@ -38,6 +38,7 @@ export class AddCategoryComponent implements OnInit {
   }
 
   _getJobs() {
+    console.log("Jobs called")
     this.jobService.getJob_byID(this.id).subscribe( response=> {
       if ( response.status ) {
         this.name = response.job.name;

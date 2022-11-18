@@ -11,6 +11,8 @@ import { ModifyuserComponent } from "./sign/modifyuser/modifyuser.component";
 import { AddCategoryComponent } from "./job/addcategory/addcategory.component";
 import { ModifycategoryComponent } from "./job/modifycategory/modifycategory.component";
 import { AttendanceTypeComponent } from "./attendance/attendance-type/attendance-type.component";
+import { ListEmployeeComponent } from "./employee/list-employee/list-employee.component";
+import { LogAttendanceComponent } from "./attendance/log-attendance/log-attendance.component";
 
 const routes:Routes = [
     {
@@ -41,7 +43,13 @@ const routes:Routes = [
         path: 'addemployee', component: AddemployeeComponent
     },
     {
+        path: 'listemployee', component: ListEmployeeComponent
+    },
+    {
         path: 'modifyemployee', component: ModifyemployeeComponent
+    },
+    {
+        path: 'attendancelog', component: LogAttendanceComponent
     },
     {
         path: 'attendancetype', component: AttendanceTypeComponent

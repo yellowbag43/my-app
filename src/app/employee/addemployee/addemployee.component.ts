@@ -20,7 +20,6 @@ export class AddemployeeComponent implements OnInit {
   allemployeetypes: Employeetype[]=[];
   typesarr : Type[]=[];
   result : response;
-  employeeID : string;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -32,8 +31,6 @@ export class AddemployeeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.employeeID = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log("REceived : ["+this.employeeID+"]")
     this._getEmployeetypes();
 
     this.form = this.fb.group({
@@ -56,7 +53,6 @@ export class AddemployeeComponent implements OnInit {
     })
   }
 
-
   onSave() {
     this.isSubmitted = true;
 
@@ -65,9 +61,11 @@ export class AddemployeeComponent implements OnInit {
       return;
     }
 
+    let dob_db: Date = new Date(this.employeeForm.dob.value);
+    console.log("Cyril "+dob_db);
       const newemployee : Employee = {
         name          : this.employeeForm.name.value,
-        dob           : this.employeeForm.dob.value,
+        dob           : dob_db,
         gender        : this.employeeForm.gender.value,
         type          : this.employeeForm.employeetype.value.id,
         email         : this.employeeForm.email.value,
@@ -98,7 +96,7 @@ export class AddemployeeComponent implements OnInit {
 
   _getEmployeetypes() {
     this.employeeService.getEmployeeTypes().subscribe( response=> {
-        this.allemployeetypes = response.employees;
+        this.allemployeetypes = response.employee;
         console.log(this.allemployeetypes);
         this._loadEmployeetypeDropdown();
     })
@@ -109,8 +107,8 @@ export class AddemployeeComponent implements OnInit {
     let tease : Type[]=[];
 
     this.allemployeetypes.forEach( (value) => {
-      console.log(value.ID+", "+value.name)
-      tease.push( { name: value.name, id: value.ID})
+      console.log(value.ID+", "+value.type)
+      tease.push( { name: value.type, id: value.ID})
     })
 
     this.typesarr = tease;

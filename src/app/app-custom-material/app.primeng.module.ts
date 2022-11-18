@@ -19,6 +19,9 @@ import { CalendarModule } from 'primeng/calendar';
 import {TableModule} from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { Chip, ChipModule } from 'primeng/chip';
+import {DividerModule} from 'primeng/divider';
+import {ToolbarModule} from 'primeng/toolbar';
+import {PanelModule} from 'primeng/panel';
 
 @NgModule({
   declarations: [],
@@ -30,6 +33,7 @@ import { Chip, ChipModule } from 'primeng/chip';
     CardModule,
     CalendarModule,
     DockModule,
+    ToolbarModule,
     ButtonModule,
     CheckboxModule,
     ImageModule,
@@ -41,11 +45,13 @@ import { Chip, ChipModule } from 'primeng/chip';
     PasswordModule,
     RadioButtonModule,
     ChipModule,
+    PanelModule,
   ],
   exports: [
     CommonModule,
     ConfirmDialogModule,
     ToastModule,
+    ToolbarModule,
     AccordionModule,
     CardModule,
     CalendarModule,
@@ -61,6 +67,8 @@ import { Chip, ChipModule } from 'primeng/chip';
     PasswordModule,
     RadioButtonModule,
     ChipModule,
+    DividerModule,
+    PanelModule
   ],
   providers: [MessageService, ConfirmationService],
 

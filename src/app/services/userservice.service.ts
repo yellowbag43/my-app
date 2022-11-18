@@ -18,16 +18,24 @@ export class UserserviceService {
     return this.http.post<any>(`${this.apiUserURL}/register`, newuser);
   }
 
+  amendUser(updatedjob: User): Observable<any> {
+    return this.http.put<any>(`${this.apiUserURL}amend`, updatedjob);
+  }
+
   getUserTypes(): Observable<any> {
     return this.http.get<any>(`${this.apiUserURL}/getcategory`);
   }
 
   getAllUsers(): Observable<any> {
-    return this.http.get<any>(`${this.apiUserURL}get`);
+    return this.http.get<any>(`${this.apiUserURL}all`);
   }
 
-  deleteUser(userID : number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUserURL}/${userID}`);
+  getUser_byID(user: User): Observable<any> {
+    return this.http.get<any>(`${this.apiUserURL}get/${user.ID}`);
+  }
+
+  deleteUser(userID): Observable<any> {
+    return this.http.delete<any>(`${this.apiUserURL}/${userID.ID}`);
   }
 
   changePassword(newpasswd : any): Observable<any> {

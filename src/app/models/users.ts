@@ -6,8 +6,7 @@ export class User {
     password    : string;
     mobile      : string;
     email       : string;
-    address1    : string;
-    address2    : string;
+    address     : string;
     area        : string;
     state       : string;
     zip         : string;

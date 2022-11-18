@@ -1,6 +1,7 @@
 <p-toast></p-toast>
 <div class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
-<div class="card">
+    <div class="card border-round bg-cyan-100 border-y-2 border-x-2 border-blue-300 pt-2 pr-2 pl-2">
+
     <form [formGroup]="form">
     <h5>New User Form</h5>
     <div class="formgrid grid">
@@ -29,19 +30,19 @@
         <div class="field col-12 md:col-6">
             <label for="email">Email</label>
             <input formControlName="email" id="email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-            <small *ngIf="employeeForm.email.invalid && isSubmitted" class="p-error">
-                <span *ngIf="employeeForm.email.errors?.required">Email is Mandatory</span>
-                <span *ngIf="employeeForm.email.errors?.email">Email id is Invalid</span>
-            </small>
         </div>
         <div class="field col-12 md:col-6">
             <label for="mobile">Mobile</label>
             <input formControlName="mobile" id="mobile" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            <small *ngIf="employeeForm.mobile.invalid && isSubmitted" class="p-error">
+                <span *ngIf="employeeForm.mobile.errors?.required">Mobile number is Mandatory</span>
+            </small>
         </div>
         <div class="field col-12">
             <label for="address">Address</label>
             <textarea formControlName="address" id="address" type="text" rows="4" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></textarea>
         </div>
+
         <div class="field col-12 md:col-4">
             <label for="city">Town/City</label>
             <input formControlName="city" id="city" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">

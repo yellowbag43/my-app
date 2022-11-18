@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
                     {
                         label:'Log',
                         icon:'pi pi-fw pi-user-plus',
-                        routerLink: ['addemployee']
+                        routerLink: ['attendancelog']
                     },
                     {
                         label:'Query',
@@ -133,10 +133,6 @@ export class HomeComponent implements OnInit {
                           icon:'pi pi-fw pi-user-plus',
                           routerLink: ['addemployee']
                       },
-                      {
-                          label:'Category',
-                          icon:'pi pi-fw pi-clone'
-                      },
                       ]
                   },
                   {
@@ -146,29 +142,10 @@ export class HomeComponent implements OnInit {
                       {
                           label:'Employee',
                           icon:'pi pi-fw pi-user-plus',
-                          routerLink: ['modifyemployee']
+                          routerLink: ['listemployee']
                       },
-                      {
-                        label:'Category',
-                        icon:'pi pi-fw pi-clone'
-                    },
                     ]
-                  },
-                  {
-                    label:'Delete',
-                    icon:'pi pi-fw pi-times',
-                    items:[
-                    {
-                        label:'Employee',
-                        icon:'pi pi-fw pi-user-plus'
-                    },
-                    {
-                      label:'Category',
-                      icon:'pi pi-fw pi-clone'
-                  },
-                  ]
-                }
-
+                  }
               ]
           },
           {

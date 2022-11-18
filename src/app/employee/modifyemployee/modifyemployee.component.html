@@ -1,29 +1,91 @@
 <p-toast></p-toast>
-<div class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
-    <div class="card">
-        <p-table [value]="allemployees" styleClass="p-datatable-sm" [tableStyle]="{'min-width': '50rem'}">
-            <ng-template pTemplate="caption">
-                Available User Logins
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Name</th>
-                    <th>Mobile</th>
-                    <th>Employee Category</th>
-                    <th>Modify</th>
-                    <th>Delete</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-employee>
-                <tr>
-                    <td>{{employee.name}}</td>
-                    <td>{{employee.mobile}}</td>
-                    <td>{{employee.category}}</td>
-                    <td (click)="modifyUser(employee)"><button pButton pRipple type="button" icon="pi pi-pencil"  class="p-button-rounded p-button-text"></button></td>
-                    <td (click)="deleteUser(employee)"><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button></td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
+
+<div  class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+
+    <p-panel *ngIf="data_ready" header="Modify Form">
+        <ng-template pTemplate="icons">
+            <button (click)="OnCancel()" pButton class="p-button-secondary p-2 m-2">Cancel </button>
+            <button (click)="OnSave()" pButton class="p-button-success p-2 m-2">Update </button>
+        </ng-template>
+        <div class="grid p-fluid">
+            <div class="field col-12 md:col-4">
+                <label for="name">Employee Name</label>
+                <input [(ngModel)]="employeeObj.name" type="text" pInputText placeholder="Employee Name" class="w-full">         
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="gender">Gender</label>
+                <p-dropdown [(ngModel)] = "selected_GenderType" [options]="gendertypes_arr" optionLabel="name"></p-dropdown>
+            </div>    
+            <div class="field col-12 md:col-4">
+                <label for="icon">Date of Birth</label>
+                <p-calendar [(ngModel)]="employeeObj.dob" [showIcon]="true" inputId="icon"></p-calendar>          
+            </div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="field col-12 md:col-4">
+                <label for="name">Employee Category</label>
+                <p-dropdown [(ngModel)] = "selected_EmpType" [options]="emptypes_arr" optionLabel="name"></p-dropdown>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="email">Email</label>
+                <input [(ngModel)] ="employeeObj.email" type="email" pInputText placeholder="Email" class="w-full">         
+            </div>    
+            <div class="field col-12 md:col-4">
+                <label for="mobile">Mobile</label>
+                <input [(ngModel)] ="employeeObj.mobile" type="text" pInputText placeholder="Mobile" class="w-full">         
+            </div>    
+        </div>
+        <div class="grid p-fluid">
+            <div class="field col-12 md:col-12">
+                <label for="address">Address</label>
+                <textarea [(ngModel)]="employeeObj.address" id="address" type="text" rows="4" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                 pInputText placeholder="Address Field"></textarea>
+            </div>
+        </div>
+        <div class="grid p-fluid">
+            <div class="field col-12 md:col-4">
+                <label for="area">Area/City</label>
+                <input [(ngModel)] ="employeeObj.area" type="text" pInputText placeholder="Area" class="w-full">         
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="state">State</label>
+                <input [(ngModel)] ="employeeObj.state" type="text" pInputText placeholder="State" class="w-full">         
+            </div>    
+            <div class="field col-12 md:col-4">
+                <label for="zip">Pincode</label>
+                <input [(ngModel)] ="employeeObj.zip" type="text" pInputText placeholder="Pin code" class="w-full">         
+            </div>    
+        </div>
+    </p-panel>
+
+    <p-panel header="Other">
+        <div *ngIf="employeeObj" class="grid p-fluid">
+            <div class="field col-12 md:col-2">
+                <label for="salary">Salary</label>
+                <input [(ngModel)] ="employeeObj.salary" type="text" pInputText placeholder="Salary" [disabled]="true" class="w-full">         
+            </div>
+            <div class="field col-12 md:col-2">
+                <label for="pf">Profident Fund (PF)</label>
+                <input [(ngModel)] ="employeeObj.pf" type="text" pInputText placeholder="pf" [disabled]="true" class="w-full">         
+            </div>    
+            <div class="field col-12 md:col-2">
+                <label for="cash">Cash Advance</label>
+                <input [(ngModel)] ="employeeObj.cashadvance" type="text" pInputText placeholder="cash" [disabled]="true" class="w-full">         
+            </div>    
+            <div class="field col-12 md:col-2">
+                <label for="bank">Bank</label>
+                <input [(ngModel)] ="employeeObj.bankname" type="text" pInputText placeholder="Bank" [disabled]="true" class="w-full">         
+            </div>
+            <div class="field col-12 md:col-2">
+                <label for="account">Account Number</label>
+                <input [(ngModel)] ="employeeObj.account" type="text" pInputText placeholder="account number" [disabled]="true" class="w-full">         
+            </div>    
+            <div class="field col-12 md:col-2">
+                <label for="ifsc">IFSC Code</label>
+                <input [(ngModel)] ="employeeObj.ifsccode" type="text" pInputText placeholder="IFSC Code"  [disabled]="true" class="w-full">         
+            </div>    
+        </div>
+    </p-panel>
 </div>
+
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

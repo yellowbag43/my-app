@@ -19,12 +19,11 @@ export class AdduserComponent implements OnInit {
   form        : FormGroup;
   isSubmitted : boolean = false;
   passwordmatching : boolean = false;
-  allusertypes: Usertypes[]=[];
+  allusertypes : Usertypes[]=[];
   typesarr : Type[]=[];
   result : response;
-
   errorstr: string;
-  
+
   constructor(
               private router: Router,
               private userService: UserserviceService,
@@ -63,7 +62,6 @@ export class AdduserComponent implements OnInit {
   onSave() {
     this.isSubmitted = true;
 
-
     if ( this.form.invalid)
     {
       return;
@@ -76,8 +74,7 @@ export class AdduserComponent implements OnInit {
         password    : this.userForm.password.value,
         mobile      : this.userForm.mobile.value,
         email       : this.userForm.email.value,
-        address1    : this.userForm.address.value,
-        address2    : "",
+        address     : this.userForm.address.value,
         area        : this.userForm.city.value,
         state       : this.userForm.state.value,
         zip         : this.userForm.zip.value
@@ -122,7 +119,6 @@ export class AdduserComponent implements OnInit {
         this.router.navigate(['/dashboard'])
       }
     })
-
   }
 
   addMessage(state: boolean, log: string) {

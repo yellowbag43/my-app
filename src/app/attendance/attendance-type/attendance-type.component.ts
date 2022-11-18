@@ -18,6 +18,7 @@ export class AttendanceTypeComponent implements OnInit {
   description : string;
   isSubmitted: boolean = false;
   result : response;
+  isInputForm : boolean = false;
   isEdit : boolean = false;
   id : number;
   constructor(private attendanceService : AttendanceserviceService,
@@ -40,8 +41,19 @@ export class AttendanceTypeComponent implements OnInit {
     })
   }
 
-  modifyType(type: AttendanceType) {   
-    this.name = type.name;
+  addType()
+  {
+    this.isInputForm=true;
+    this.isEdit=false; 
+    this.name = '';
+    this.description = ''; 
+    this.id = null;
+  }
+
+  modifyType(type: AttendanceType) {  
+    this.isInputForm=true;
+    this.isEdit=true; 
+    this.name = type.type;
     this.description = type.description; 
     this.id = type.ID;
     this.isEdit = true;
@@ -54,11 +66,10 @@ export class AttendanceTypeComponent implements OnInit {
     if (this.name.length===0){  console.log("Invalid"); return; }
 
     const newType : AttendanceType = {
-      ID   : this.id,
-      name : this.name,
-      description :  this.description
+      type : this.name,
+      description :  this.description,
+      ID   : this.id
     }
-    console.log("new "+newType.ID)
      if ( this.isEdit)
      {
        this.attendanceService.amendJob(newType).subscribe( 
@@ -72,6 +83,8 @@ export class AttendanceTypeComponent implements OnInit {
                  this.addMessage(false, error);           
             }
            ()=> console.log("Completed!")
+           this.isEdit=false;
+           this.isInputForm=false;
        })  
      }
      else {
@@ -88,11 +101,16 @@ export class AttendanceTypeComponent implements OnInit {
                 this.addMessage(false, error);           
             }
           ()=> console.log("Completed!")
-      }) 
+          this.isEdit=false;
+          this.isInputForm=false;
+        }) 
     }
-    }
+  }
   
-  onCancel() {};
+  onCancel() {
+    this.isEdit=false
+    this.isEdit=false
+  };
 
   deleteType(atype: AttendanceType) {
     this.attendanceService.deleteType(atype).subscribe( 

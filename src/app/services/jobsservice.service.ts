@@ -13,11 +13,11 @@ export class JobsserviceService {
   constructor(private http: HttpClient) {}
 
   getAllJobs(): Observable<any> {
-    return this.http.get<any>(`${this.apiJobsURL}get`);
+    return this.http.get<any>(`${this.apiJobsURL}all`);
   }
 
   getJob_byID(ID :string): Observable<any> {
-    return this.http.get<any>(`${this.apiJobsURL}getid/${ID}`);
+    return this.http.get<any>(`${this.apiJobsURL}get/${ID}`);
   }
 
   addNewJob(newjob: Job): Observable<any> {

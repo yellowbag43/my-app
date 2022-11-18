@@ -22,7 +22,15 @@ export class EmployeeserviceService {
   }
 
   getAllEmployees(): Observable<any> {
-    return this.http.get<any>(`${this.apiEmployeeURL}/get`);
+    return this.http.get<any>(`${this.apiEmployeeURL}all`);
+  }
+
+  getEmployee_byID(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiEmployeeURL}get/${id}`);
+  }
+
+  amendEmployee(updatedemployee: Employee): Observable<any> {
+    return this.http.put<any>(`${this.apiEmployeeURL}amend`, updatedemployee);
   }
 
   deleteEmployee(employee : Employee): Observable<any> {

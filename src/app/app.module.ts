@@ -19,6 +19,8 @@ import { ModifyemployeeComponent } from './employee/modifyemployee/modifyemploye
 import { AddCategoryComponent } from './job/addcategory/addcategory.component';
 import { ModifycategoryComponent } from './job/modifycategory/modifycategory.component';
 import { AttendanceTypeComponent } from './attendance/attendance-type/attendance-type.component';
+import { ListEmployeeComponent } from './employee/list-employee/list-employee.component';
+import { LogAttendanceComponent } from './attendance/log-attendance/log-attendance.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { AttendanceTypeComponent } from './attendance/attendance-type/attendance
     ModifyemployeeComponent,
     AddCategoryComponent,
     ModifycategoryComponent,
-    AttendanceTypeComponent
+    AttendanceTypeComponent,
+    ListEmployeeComponent,
+    LogAttendanceComponent
   ],
   imports: [
     AppRoutingModule,

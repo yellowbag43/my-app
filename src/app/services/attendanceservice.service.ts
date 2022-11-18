@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment';
-import { AttendanceType } from '../models/attendance';
+import { Attendance, AttendanceType } from '../models/attendance';
 @Injectable({
   providedIn: 'root'
 })
@@ -31,5 +31,8 @@ export class AttendanceserviceService {
     return this.http.delete<any>(`${this.apiAttendanceURL}deletetype/${atype.ID}`);
   }
 
+  addAttendance(newlog: any): Observable<any> {
+    return this.http.post<any>(`${this.apiAttendanceURL}add`, newlog);
+  }
 
 }
