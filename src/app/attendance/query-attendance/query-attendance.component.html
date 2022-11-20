@@ -1,0 +1,39 @@
+<p-toast></p-toast>
+<div class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+
+<p-panel header="Query Attendance">
+    <div  class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+        <div *ngIf="isInput" class="formgrid grid border-blue-200 justify-content-center">
+            <div class="field col-12 md:col-3">
+                <p-autoComplete [(ngModel)]="selectedEmployee" [suggestions]="filteredEmployees" (completeMethod)="filterEmployee($event)"
+                                  field="name" [minLength]="1" placeholder="Enter Name"  [dropdown]="true"></p-autoComplete>
+            </div>
+            <div class="field col-12 md:col-3">
+                <!-- <p-calendar class="ml-5" dateFormat="yy-mm-dd" inputId="dateformat" placeholder="Date"></p-calendar>
+                <label for="range">Range</label> -->
+                <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" inputId="range" placeholder="Pick date range"></p-calendar>
+            </div>  
+            <div class="field col-12 md:col-3">
+                <button (click)="queryDate()" pButton pRipple type="button" label="Query" class="p-button-raised p-button-primary p-button-text w-full "></button>
+            </div>
+        </div>
+    </div>
+</p-panel>
+<p-card><p-table [value]="attendance" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header">
+        <h2 *ngIf="selectedEmployee">{{selectedEmployee.name}}</h2>
+        <tr>
+            <th>Date</th>
+            <th>Attendance</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{product.date}}</td>
+            <td>{{product.type}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+</p-card>
+</div>

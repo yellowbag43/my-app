@@ -26,24 +26,12 @@ export class HomeComponent implements OnInit {
                 {
                     label:'Log Jobs',
                     icon:'pi pi-fw pi-book',
-                    routerLink: []
+                    routerLink: ['jobadd']
                 },
-              {
+                  {
                       label:'Category',
                       icon:'pi pi-fw pi-clone',
-                      items:[
-                      {
-                          label:'Modify',
-                          icon:'pi pi-fw pi-pencil',
-                          routerLink: ['modifyjobcategory']
-                      },
-                      {
-                          label:'New',
-                          icon:'pi pi-fw pi-plus',
-                          routerLink: ['addjobcategory']
-                      },
-
-                      ]
+                      routerLink: ['jobtypes']
                   },
                   {
                       separator:true
@@ -114,7 +102,8 @@ export class HomeComponent implements OnInit {
                     },
                     {
                         label:'Query',
-                        icon:'pi pi-fw pi-clone'
+                        icon:'pi pi-fw pi-clone',
+                        routerLink: ['queryattendance']
                     },
                     {
                         label:'Categories',

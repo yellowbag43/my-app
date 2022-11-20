@@ -15,6 +15,10 @@ export class AttendanceserviceService {
     return this.http.get<any>(`${this.apiAttendanceURL}${adate}`);
   }
 
+  queryAttendance(qdate: any): Observable<any> {
+    return this.http.post<any>(`${this.apiAttendanceURL}query`, qdate);
+  }
+
   getAttendanceType(): Observable<any> {
     return this.http.get<any>(`${this.apiAttendanceURL}type`);
   }

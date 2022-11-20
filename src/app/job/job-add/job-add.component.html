@@ -1,0 +1,75 @@
+<p-toast></p-toast>
+<div class="block bg-green-100 font-bold p-3 border-round mb-3">
+<p-card *ngIf="keyMode" >
+        <div  class="card">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-12">
+                <h2>Job Entries</h2>
+                </div>  
+            <div class="field col-12 md:col-3">
+                <p-calendar [(ngModel)]="jdate" [readonlyInput]="true" inputId="range" placeholder="Date"
+                class="text-base text-color surface-overlay focus:border-primary w-full">
+                </p-calendar>                
+            </div>
+            <div class="field col-12 md:col-3">
+                    <p-autoComplete (onSelect)="addjob()" [(ngModel)]="selectedJob" [suggestions]="filteredJobs" (completeMethod)="filterJob($event)"
+                                      field="name" [minLength]="1" placeholder="Select Job"  [dropdown]="true"></p-autoComplete>
+            </div>
+            <div class="field col-12 md:col-3">
+                <p-autoComplete (onSelect)="addjob()" [(ngModel)]="selectedEmployee" [suggestions]="filteredEmployees" (completeMethod)="filterEmployee($event)"
+                                  field="name" [minLength]="1" placeholder="Select Employee"  [dropdown]="true"></p-autoComplete>
+            </div>
+        </div>
+    </div>
+</p-card>    
+<p-card *ngIf="!keyMode" header={{this.selectedJob.name}} subheader={{this.selectedEmployee.name}} class="justify-content-center">
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-3">
+                <label for="count">Count</label>
+                <input [(ngModel)]="count" id="count" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div>
+            <div class="field col-12 md:col-3">
+                <label for="size">Size</label>
+                <input [(ngModel)]="size" id="size" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div>
+        </div>  
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6">
+                <label for="description">Description</label>
+                <input [(ngModel)]="description" id="description" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div>
+        </div>
+    
+        <div class="formgrid grid ">
+            <div class="field col-12 md:col-2">
+            <!-- <button (click)="onSave()" type="button" class="text-white bg-green-700 border-red-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">Save</button> -->
+            <button (click)="Save()" pButton pRipple type="button" label="Save" class="p-button-raised p-button-primary p-button-text w-full "></button>
+        </div>
+        <div class="field col-12 md:col-2">
+            <button (click)="Cancel()" pButton pRipple type="button" label="Cancel" class="p-button-raised p-button-text p-button-plain w-full"></button>
+        </div>        
+        </div>  
+</div>
+</p-card>
+<p-table *ngIf="joblog.length>0" [value]="joblog" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Employee</th>
+            <th>Job</th>
+            <th>count</th>
+            <th>size</th>
+            <th>Description</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.jname}}</td>
+            <td>{{product.count}}</td>
+            <td>{{product.size}}</td>
+            <td>{{product.description}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>  

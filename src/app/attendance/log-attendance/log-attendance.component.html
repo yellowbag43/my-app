@@ -15,8 +15,8 @@
 </p-card>
 <div *ngIf="date_ready" class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
     <div  class="card">
-        <p-table [value]="alistObj" editMode="row"
-        styleClass="p-datatable-sm" [rows]="10">
+        <p-table [value]="alistObj" editMode="row" [tableStyle]="{'min-width': '50rem'}"
+         styleClass="p-datatable-sm">
             <ng-template pTemplate="caption">
                 <button pButton pRipple type="button" label={{displayDate()}} class="p-button-text p-button-plain"></button>           
                 <button (click)="date_ready=false" icon="pi pi-arrow-circle-left" pButton pRipple type="button" label=".." class="p-button-text p-button-plain"></button>           

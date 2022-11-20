@@ -12,6 +12,10 @@ export class JobsserviceService {
 
   constructor(private http: HttpClient) {}
 
+  getAllJoblogs(): Observable<any> {
+    return this.http.get<any>(`${this.apiJobsURL}alljobs`);
+  }
+
   getAllJobs(): Observable<any> {
     return this.http.get<any>(`${this.apiJobsURL}all`);
   }
@@ -28,7 +32,7 @@ export class JobsserviceService {
     return this.http.put<any>(`${this.apiJobsURL}amend`, updatedjob);
   }
   
-  deleteUser(job : Job): Observable<any> {
+  deleteJob(job : Job): Observable<any> {
     return this.http.delete<any>(`${this.apiJobsURL}/${job.ID}`);
   }
 

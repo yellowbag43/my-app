@@ -16,6 +16,7 @@ interface Type { name: string, id: number }
   templateUrl: './modifyuser.component.html',
   styleUrls: ['./modifyuser.component.scss']
 })
+
 export class ModifyuserComponent implements OnInit {
   allusers: User[]=[];
   isModify : boolean = false;

@@ -8,11 +8,12 @@ import { AdduserComponent } from "./sign/adduser/adduser.component";
 import { ChangepasswordComponent } from "./sign/changepassword/changepassword.component";
 import { LoginComponent } from "./sign/login/login.component";
 import { ModifyuserComponent } from "./sign/modifyuser/modifyuser.component";
-import { AddCategoryComponent } from "./job/addcategory/addcategory.component";
-import { ModifycategoryComponent } from "./job/modifycategory/modifycategory.component";
 import { AttendanceTypeComponent } from "./attendance/attendance-type/attendance-type.component";
 import { ListEmployeeComponent } from "./employee/list-employee/list-employee.component";
 import { LogAttendanceComponent } from "./attendance/log-attendance/log-attendance.component";
+import { QueryAttendanceComponent } from "./attendance/query-attendance/query-attendance.component";
+import { JobTypesComponent } from "./job/job-types/job-types.component";
+import { JobAddComponent } from "./job/job-add/job-add.component";
 
 const routes:Routes = [
     {
@@ -25,10 +26,10 @@ const routes:Routes = [
         path: '', component: DashboardComponent
     },
     {
-        path: 'addjobcategory',  component: AddCategoryComponent
+        path: 'jobadd',  component: JobAddComponent
     },
     {
-        path: 'modifyjobcategory',  component: ModifycategoryComponent
+        path: 'jobtypes',  component: JobTypesComponent
     },
     {
         path: 'adduser', component: AdduserComponent
@@ -54,6 +55,9 @@ const routes:Routes = [
     {
         path: 'attendancetype', component: AttendanceTypeComponent
     },
+    {
+        path: 'queryattendance', component: QueryAttendanceComponent
+    }
 
 ];
 

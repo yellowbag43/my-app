@@ -16,11 +16,12 @@ import { ModifyuserComponent } from './sign/modifyuser/modifyuser.component';
 import { ChangepasswordComponent } from './sign/changepassword/changepassword.component';
 import { AddemployeeComponent } from './employee/addemployee/addemployee.component';
 import { ModifyemployeeComponent } from './employee/modifyemployee/modifyemployee.component';
-import { AddCategoryComponent } from './job/addcategory/addcategory.component';
-import { ModifycategoryComponent } from './job/modifycategory/modifycategory.component';
 import { AttendanceTypeComponent } from './attendance/attendance-type/attendance-type.component';
 import { ListEmployeeComponent } from './employee/list-employee/list-employee.component';
 import { LogAttendanceComponent } from './attendance/log-attendance/log-attendance.component';
+import { QueryAttendanceComponent } from './attendance/query-attendance/query-attendance.component';
+import { JobTypesComponent } from './job/job-types/job-types.component';
+import { JobAddComponent } from './job/job-add/job-add.component';
 
 @NgModule({
   declarations: [
@@ -33,11 +34,12 @@ import { LogAttendanceComponent } from './attendance/log-attendance/log-attendan
     ChangepasswordComponent,
     AddemployeeComponent,
     ModifyemployeeComponent,
-    AddCategoryComponent,
-    ModifycategoryComponent,
     AttendanceTypeComponent,
     ListEmployeeComponent,
-    LogAttendanceComponent
+    LogAttendanceComponent,
+    QueryAttendanceComponent,
+    JobTypesComponent,
+    JobAddComponent
   ],
   imports: [
     AppRoutingModule,
