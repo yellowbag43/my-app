@@ -9,7 +9,8 @@ export const environment = {
   apiEmployeeURL: "http://localhost:4005/mk-api/v1/employee/",
   apiJobURL: "http://localhost:4005/mk-api/v1/job/",
   apiJoblogURL: "http://localhost:4005/mk-api/v1/joblog/",
-  apiAttendanceURL: "http://localhost:4005/mk-api/v1/attendance/"
+  apiAttendanceURL: "http://localhost:4005/mk-api/v1/attendance/",
+  apiReportsURL: "http://localhost:4005/mk-api/v1/reports/"
 
 };
 

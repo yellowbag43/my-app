@@ -7,7 +7,7 @@
                 <h2>Job Entries</h2>
                 </div>  
             <div class="field col-12 md:col-3">
-                <p-calendar [(ngModel)]="jdate" [readonlyInput]="true" inputId="range" placeholder="Date"
+                <p-calendar (onSelect)="addjob()" [(ngModel)]="jdate" [readonlyInput]="true" inputId="range" placeholder="Date"
                 class="text-base text-color surface-overlay focus:border-primary w-full">
                 </p-calendar>                
             </div>
@@ -19,10 +19,13 @@
                 <p-autoComplete (onSelect)="addjob()" [(ngModel)]="selectedEmployee" [suggestions]="filteredEmployees" (completeMethod)="filterEmployee($event)"
                                   field="name" [minLength]="1" placeholder="Select Employee"  [dropdown]="true"></p-autoComplete>
             </div>
+            <div class="field col-12 md:col-3">
+                <button (click)="Close()" pButton pRipple type="button" label="Close tab" class="p-button-raised p-button-text p-button-plain w-fit"></button>
+            </div>        
         </div>
     </div>
 </p-card>    
-<p-card *ngIf="!keyMode" header={{this.selectedJob.name}} subheader={{this.selectedEmployee.name}} class="justify-content-center">
+<p-card *ngIf="!keyMode" header={{this.selectedJob.name}} class="justify-content-center">
     <div class="card">
         <div class="formgrid grid">
             <div class="field col-12 md:col-3">
@@ -33,7 +36,10 @@
                 <label for="size">Size</label>
                 <input [(ngModel)]="size" id="size" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
             </div>
-        </div>  
+            <div class="field col-12 md:col-3">
+                <div *ngIf="this.selectedEmployee.name"> <h4>{{this.selectedEmployee.name}}</h4></div>
+            </div>
+            </div>  
         <div class="formgrid grid">
             <div class="field col-12 md:col-6">
                 <label for="description">Description</label>
@@ -52,7 +58,7 @@
         </div>  
 </div>
 </p-card>
-<p-table *ngIf="joblog.length>0" [value]="joblog" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+<p-table *ngIf="joblog.length>0" [value]="joblog" styleClass="p-datatable-sm p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>
             <th>Employee</th>

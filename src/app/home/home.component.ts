@@ -47,8 +47,9 @@ export class HomeComponent implements OnInit {
               icon:'pi pi-fw pi-pencil',
               items:[
                   {
-                      label:'Left',
-                      icon:'pi pi-fw pi-align-left'
+                      label:'Job Wise',
+                      icon:'pi pi-fw pi-align-left',
+                      routerLink: ['reportjobwise']
                   },
                   {
                       label:'Right',

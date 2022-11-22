@@ -14,6 +14,7 @@ import { LogAttendanceComponent } from "./attendance/log-attendance/log-attendan
 import { QueryAttendanceComponent } from "./attendance/query-attendance/query-attendance.component";
 import { JobTypesComponent } from "./job/job-types/job-types.component";
 import { JobAddComponent } from "./job/job-add/job-add.component";
+import { JobwiseComponent } from "./report/jobwise/jobwise.component";
 
 const routes:Routes = [
     {
@@ -57,8 +58,10 @@ const routes:Routes = [
     },
     {
         path: 'queryattendance', component: QueryAttendanceComponent
+    },
+    {
+        path: 'reportjobwise', component: JobwiseComponent
     }
-
 ];
 
 

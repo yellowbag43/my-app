@@ -22,6 +22,7 @@ import { LogAttendanceComponent } from './attendance/log-attendance/log-attendan
 import { QueryAttendanceComponent } from './attendance/query-attendance/query-attendance.component';
 import { JobTypesComponent } from './job/job-types/job-types.component';
 import { JobAddComponent } from './job/job-add/job-add.component';
+import { JobwiseComponent } from './report/jobwise/jobwise.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { JobAddComponent } from './job/job-add/job-add.component';
     LogAttendanceComponent,
     QueryAttendanceComponent,
     JobTypesComponent,
-    JobAddComponent
+    JobAddComponent,
+    JobwiseComponent
   ],
   imports: [
     AppRoutingModule,

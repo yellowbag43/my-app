@@ -5,6 +5,7 @@ import { JobsserviceService } from 'src/app/services/jobsservice.service';
 import { JoblogService } from 'src/app/services/joblog.service';
 import { EmployeeserviceService } from 'src/app/services/employeeservice.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-add',
@@ -30,11 +31,14 @@ export class JobAddComponent implements OnInit {
   constructor(private jobService: JobsserviceService,
               private employeeService: EmployeeserviceService,
               private joblogService: JoblogService,
+              private route: Router,
               private messageService: MessageService) { }
 
   ngOnInit(): void {
     this._getJobs()
     this._getEmployees()
+    this._getJobLog();
+
   }
 
   _getJobs() {
@@ -67,9 +71,10 @@ export class JobAddComponent implements OnInit {
   }
 
   addjob() { 
-    if ( this.selectedEmployee && this.selectedJob ) {
-      console.log("Selected Employee ["+this.selectedEmployee.name +"],["+this.selectedJob.name+"]") 
-      this.keyMode=false;
+    if ( this.jdate && this.selectedJob ) {
+      console.log("Selected Job date ["+this.jdate +"],["+this.selectedJob.name+"]") 
+      if (this.selectedEmployee)
+        this.keyMode=false;
       this._getJobLog();
     }
 }
@@ -96,13 +101,18 @@ export class JobAddComponent implements OnInit {
       }
       else {
         console.log("Failed to add Log")
-        this.addMessage(false, "Failed to add Job")
+        this.addMessage(false, response.message)
       }
+   
     })
 
   }
 
   Cancel() { this.keyMode=true; this.selectedEmployee=null}
+
+  Close() {
+    this.route.navigate(['dashboard'])
+  }
 
   filterJob(event) {
     //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side

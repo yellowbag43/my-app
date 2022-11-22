@@ -62,7 +62,6 @@ export class AddemployeeComponent implements OnInit {
     }
 
     let dob_db: Date = new Date(this.employeeForm.dob.value);
-    console.log("Cyril "+dob_db);
       const newemployee : Employee = {
         name          : this.employeeForm.name.value,
         dob           : dob_db,
@@ -96,16 +95,16 @@ export class AddemployeeComponent implements OnInit {
 
   _getEmployeetypes() {
     this.employeeService.getEmployeeTypes().subscribe( response=> {
-        this.allemployeetypes = response.employee;
-        console.log(this.allemployeetypes);
-        this._loadEmployeetypeDropdown();
+      if ( response.status) {
+        this.allemployeetypes = response.employeecategories;
+        this._loadEmployeetypeDropdown();}
     })
   }
 
   _loadEmployeetypeDropdown()
   {
     let tease : Type[]=[];
-
+    console.log("Employe type searching)")
     this.allemployeetypes.forEach( (value) => {
       console.log(value.ID+", "+value.type)
       tease.push( { name: value.type, id: value.ID})
