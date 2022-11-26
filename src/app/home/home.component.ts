@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem} from 'primeng/api';
-import { Router  } from '@angular/router';
+import { Router, RouterLink  } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -57,8 +57,9 @@ export class HomeComponent implements OnInit {
                       routerLink: ['reportdailywages']
                   },
                   {
-                      label:'Center',
-                      icon:'pi pi-fw pi-align-center'
+                      label:'Salaries',
+                      icon:'pi pi-fw pi-align-center',
+                      routerLink: ['salaries']
                   },
                   {
                       label:'Justify',
@@ -143,17 +144,10 @@ export class HomeComponent implements OnInit {
                   ]
                   },
                   {
-                    label:'Payment',
+                    label:'Payments',
                     icon:'pi pi-fw pi-money-bill',
-                    items:[
-                    {
-                        label:'Settings',
-                        icon:'pi pi-fw pi-cog',
-                        routerLink: ['settingspayment']
-                    },
-                ]
+                    routerLink: ['transactions']
                 }
-
               ]
           },
           {

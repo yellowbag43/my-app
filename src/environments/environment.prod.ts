@@ -7,7 +7,8 @@ export const environment = {
   apiJoblogURL:     "http://13.115.154.253:80/mk-api/v1/joblog/",
 
   apiAttendanceURL: "http://13.115.154.253:80/mk-api/v1/attendance/",
-  apiReportsURL: "http://13.115.154.253:80/mk-api/v1/reports/"
+  apiReportsURL: "http://13.115.154.253:80/mk-api/v1/reports/",
+  apiTransactionsURL : "http://13.115.154.253:80/mk-api/v1/transactions/"
 
 
 };

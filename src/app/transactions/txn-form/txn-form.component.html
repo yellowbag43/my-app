@@ -1,0 +1,115 @@
+<p-toast></p-toast>
+<div  *ngIf="!isModify" class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+    <div  class="card">
+        <p-table 
+        [value]="allemployees" #dt responsiveLayout="scroll"
+        [paginator]="true"     [rows]="5"  [showCurrentPageReport]="true"
+        [filterDelay]="0" [globalFilterFields]="['name','typestr']">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            Employees
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" 
+                    (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+                    placeholder="Search" /></span>
+        </div>
+    </ng-template>
+        <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+            <th>Payment</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-employee>
+        <tr>
+            <td ><button pButton pRipple type="button" icon="pi pi-cash" label={{employee.name}}  class="p-button-text"></button></td>
+            <!-- <div class="flex pt-5 align-items-center justify-content-center"> -->
+                <td ><button (click)="processForm(employee)" pButton pRipple type="button" icon="pi pi-cash" label="Details"  class="p-button-raised p-button-warning"></button></td>
+            <!-- </div> -->
+        </tr>
+    </ng-template>
+</p-table>
+    </div>
+</div>
+
+
+<div  class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+    <p-panel *ngIf="isModify" header="Payment details">
+            <ng-template pTemplate="icons">
+            <button (click)="OnCancel()" pButton class="p-button-secondary p-2 m-2">Cancel </button>
+            <button (click)="onSave()" pButton class="p-button-success p-2 m-2">Update </button>
+        </ng-template>
+        <form [formGroup]="form">
+            <div class="grid p-fluid">
+            <div class="field col-12 md:col-4">
+                <label for="name">Employee Name</label>
+                <input type="text" pInputText placeholder={{selectedEmployee.name}} [disabled]="true" class="w-full">         
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="employeetype">Transaction Date</label>
+                <p-calendar formControlName="txndate" class="ml-5" dateFormat="yy-mm-dd" inputId="dateformat" placeholder="Date"></p-calendar>
+                <small *ngIf="transactionForm.txndate.invalid && isSubmitted" class="p-error">
+                    <span *ngIf="transactionForm.txndate.errors?.required">Date is Mandatory</span>
+                </small>
+            </div>  
+            <div class="field col-12 md:col-3">
+                <label for="employeetype">Transaction type</label>
+                <p-dropdown [options]="typesarr" formControlName="txntype" class="text-base surface-overlay p-2 border-1 border-solid" [editable]="true" class="w-full"  id="employeetype" placeholder="Transaction Type" optionLabel="name" [showClear]="true" >
+                </p-dropdown>
+                <small *ngIf="transactionForm.txntype.invalid && isSubmitted" class="p-error">
+                    <span *ngIf="transactionForm.txntype.errors?.required">Txn type is Mandatory</span>
+                </small>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label for="employeetype">Amount</label>
+                <input type="number" formControlName="txnamount" pInputText placeholder="Amount"  class="w-full">         
+                <small *ngIf="transactionForm.txnamount.invalid && isSubmitted" class="p-error">
+                    <span *ngIf="transactionForm.txnamount.errors?.required">Amount is Mandatory</span>
+                </small>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label for="employeetype">Description</label>
+                <input type="text" formControlName="description" pInputText placeholder="Description"  class="w-full">         
+            </div>
+        </div>
+        </form>
+<div  *ngIf="txnAvailable" class="card">
+    <p-table 
+    [value]="alltransanctions" #dt responsiveLayout="scroll" styleClass="p-datatable-sm p-datatable-striped"
+    [paginator]="true"     [rows]="5"  [showCurrentPageReport]="true"
+    [filterDelay]="0" [globalFilterFields]="['date','txntype', 'amount']">
+<ng-template pTemplate="caption">
+    <div class="table-header">
+        Previous Transactions
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" 
+                (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+                placeholder="Search" /></span>
+    </div>
+</ng-template>
+    <ng-template pTemplate="header">
+    <tr>
+        <th pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
+        <th pSortableColumn="amount">Amount<p-sortIcon field="amount"></p-sortIcon></th>
+        <th pSortableColumn="txntype">Txntype<p-sortIcon field="txntype"></p-sortIcon></th>
+        <th>Reconcile</th>
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-txn>
+    <tr> 
+        <td >{{txn.txndate}}</td>
+        <td >{{txn.amount}}</td>
+        <td >{{txn.txntype}}</td>
+        <!-- <div class="flex pt-5 align-items-center justify-content-center"> -->
+            <td (click)="reconcileTxn(txn)"><button pButton pRipple type="button" icon="pi pi-check"  class="p-button-rounded p-button-text"></button></td>
+</tr>
+</ng-template>
+</p-table>
+</div>
+
+</p-panel>
+</div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

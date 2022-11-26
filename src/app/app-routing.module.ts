@@ -17,6 +17,8 @@ import { JobAddComponent } from "./job/job-add/job-add.component";
 import { JobwiseComponent } from "./report/jobwise/jobwise.component";
 import { EmpCategoryComponent } from "./employee/emp-category/emp-category.component";
 import { DailywagesComponent } from "./report/dailywages/dailywages.component";
+import { TxnFormComponent } from "./transactions/txn-form/txn-form.component";
+import { SalaryComponent } from "./report/salary/salary.component";
 
 const routes:Routes = [
     {
@@ -69,6 +71,12 @@ const routes:Routes = [
     },
     {
         path: 'reportdailywages', component: DailywagesComponent
+    },
+    {
+        path: 'transactions', component: TxnFormComponent
+    },
+    {
+        path: 'salaries', component: SalaryComponent
     }
 
 
