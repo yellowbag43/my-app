@@ -18,6 +18,7 @@ export class ListEmployeeComponent implements OnInit {
   allemployees: Employee[]=[];
   allusertypes : Employeetype[]=[];
   typesarr : Type[]=[];
+  loading: boolean=true;
 
   constructor(private employeeService: EmployeeserviceService,
     private messageService: MessageService,
@@ -38,7 +39,7 @@ export class ListEmployeeComponent implements OnInit {
     this.employeeService.getAllEmployees().subscribe( response=> {
       if ( response.status ) {
         this.allemployees = response.employees;
-
+        this.loading=false;
         console.log(this.allemployees)
         this.addMessage(true, "Employees Fetched Successfully!")
       }
@@ -64,7 +65,7 @@ export class ListEmployeeComponent implements OnInit {
       if (response.status) {
         this._getEmployees();
         this.addMessage(true, "Employee Deleted Successfully!")
-      }
+      }else this.addMessage(false, response.message)
       err=>{ console.error("Error "+ response.message);
         this.addMessage(false, err);           }
       ()=> console.log("Completed!")

@@ -19,12 +19,16 @@
         </div>
     </div>
 </p-panel>
-<p-card><p-table [value]="attendance" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+<p-card *ngIf="attendance"><p-table 
+    [value]="attendance" responsiveLayout="scroll" styleClass="p-datatable-striped"
+    [paginator]="true"     [rows]="10"  [showCurrentPageReport]="true"
+    [filterDelay]="0" [globalFilterFields]="['date','type']">
+
     <ng-template pTemplate="header">
         <h2 *ngIf="selectedEmployee">{{selectedEmployee.name}}</h2>
         <tr>
-            <th>Date</th>
-            <th>Attendance</th>
+            <th pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
+            <th pSortableColumn="type">Attendance<p-sortIcon field="type"></p-sortIcon></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>

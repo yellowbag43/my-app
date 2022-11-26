@@ -1,39 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { AttendanceserviceService } from 'src/app/services/attendanceservice.service';
+import { EmployeeserviceService } from 'src/app/services/employeeservice.service';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { response  } from 'src/app/models/response';
-import { AttendanceType  } from 'src/app/models/attendance';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-attendance-type',
-  templateUrl: './attendance-type.component.html',
-  styleUrls: ['./attendance-type.component.scss']
+  selector: 'app-emp-category',
+  templateUrl: './emp-category.component.html',
+  styleUrls: ['./emp-category.component.scss']
 })
-export class AttendanceTypeComponent implements OnInit {
+
+export class EmpCategoryComponent implements OnInit {
   allTypes : any[]=[];
-  name : string;
+  type : string;
   description : string;
   isSubmitted: boolean = false;
   result : response;
   isInputForm : boolean = false;
   isEdit : boolean = false;
-  id : number;
-  constructor(private attendanceService : AttendanceserviceService,
-              private messageService : MessageService) { }
+  id : string;
+  constructor(private employeeService : EmployeeserviceService,
+              private messageService : MessageService,
+              private route: Router) { }
 
   ngOnInit(): void {
-    this._getAttendanceTypes()
+    this._getEmployeeTypes()
   }
 
-  _getAttendanceTypes() {
-    this.attendanceService.getAttendanceType().subscribe( response=> {
+  _getEmployeeTypes() {
+    this.employeeService.getEmployeeTypes().subscribe( response=> {
       if ( response.status ) {
-        this.allTypes = response.attendanceTypes;
+        this.allTypes = response.employeecategories;
         console.log(this.allTypes)
-        this.addMessage(true, "Fetched Types Successfully!")
+        this.addMessage(true, "Fetched Employee types Successfully!")
       }
       err=>{ console.error("Error "+ response.message);
         this.addMessage(false, err);           }
@@ -45,7 +45,7 @@ export class AttendanceTypeComponent implements OnInit {
   {
     this.isInputForm=true;
     this.isEdit=false; 
-    this.name = '';
+    this.type = '';
     this.description = ''; 
     this.id = null;
   }
@@ -53,7 +53,7 @@ export class AttendanceTypeComponent implements OnInit {
   modifyType(type: any) {  
     this.isInputForm=true;
     this.isEdit=true; 
-    this.name = type.name;
+    this.type = type.type;
     this.description = type.description; 
     this.id = type.ID;
     this.isEdit = true;
@@ -63,21 +63,21 @@ export class AttendanceTypeComponent implements OnInit {
   onSave() {
   
     this.isSubmitted=true;
-    if (this.name.length===0){  console.log("Invalid"); return; }
+    if (this.type.length===0){  console.log("Invalid"); return; }
 
-    const newType : AttendanceType = {
-      type : this.name,
+    const newType : any = {
+      type : this.type,
       description :  this.description,
       ID   : this.id
     }
      if ( this.isEdit)
      {
-       this.attendanceService.amendJob(newType).subscribe( 
+       this.employeeService.amendEmployeeType(newType).subscribe( 
          (x:any) => {
              this.result = x;
-             this.name=""
+             this.type=""
              this.description=""
-             this._getAttendanceTypes()
+             this._getEmployeeTypes()
               this.addMessage(this.result.status, this.result.message);            
            error=>{ console.error("Error "+error);
                  this.addMessage(false, error);           
@@ -88,13 +88,13 @@ export class AttendanceTypeComponent implements OnInit {
        })  
      }
      else {
-      this.attendanceService.addNewAttendanceType(newType).subscribe( 
+      this.employeeService.addNewEmployeeType(newType).subscribe( 
         (x:any) => {
             this.result = x;
             console.log("received "+ this.result.message)
-            this.name=""
+            this.type=""
             this.description=""
-            this._getAttendanceTypes()
+            this._getEmployeeTypes()
             this.addMessage(this.result.status, this.result.message);
             
           error=>{ console.error("Error "+error);
@@ -109,15 +109,19 @@ export class AttendanceTypeComponent implements OnInit {
   
   onCancel() {
     this.isEdit=false
-    this.isEdit=false
+    this.isInputForm=false;
   };
 
-  deleteType(atype: AttendanceType) {
-    this.attendanceService.deleteType(atype).subscribe( 
+  Close() {
+    this.route.navigate(['dashboard'])
+  }
+  
+  deleteType(employeetype: any) {
+    this.employeeService.deleteEmployeeType(employeetype.ID).subscribe( 
       (x:any) => {
         this.result = x;
         console.log("received "+ this.result.message)
-        this._getAttendanceTypes()
+        this._getEmployeeTypes()
         this.addMessage(this.result.status, this.result.message);
           
         error=>{ console.error("Error "+error);
@@ -134,6 +138,5 @@ export class AttendanceTypeComponent implements OnInit {
       detail: log
     })
   }
-
-
 }
+

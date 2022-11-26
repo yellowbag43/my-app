@@ -12,14 +12,22 @@
     <form [formGroup]="form">
     <h5>New User Form</h5>
     <div class="formgrid grid">
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-3">
+            <label for="employeetype">Employee type</label>
+            <p-dropdown [options]="typesarr" formControlName="employeetype" class="text-base surface-overlay p-2 border-1 border-solid" [editable]="true" class="w-full"  id="employeetype" placeholder="Select Employee Type" optionLabel="name" [showClear]="true" >
+            </p-dropdown>
+            <small *ngIf="employeeForm.employeetype.invalid && isSubmitted" class="p-error">
+                <span *ngIf="employeeForm.employeetype.errors?.required">Type is Mandatory</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-3">
             <label for="name">Name</label>
             <input formControlName="name" id="name" type="text" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary">
             <small *ngIf="employeeForm.name.invalid && isSubmitted" class="p-error">
                 <span *ngIf="employeeForm.name.errors?.required">Name is Mandatory</span>
             </small>
         </div>
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-3">
             <label for="gender">Gender</label>
             <select formControlName="gender" id="gender" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
                 <option>Male</option>
@@ -27,23 +35,27 @@
                 <option>Other</option>
             </select>
         </div>
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-3">
             <label for="dob">Date of Birth</label>
             <input formControlName="dob" id="dob" type="date" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary">
             <small *ngIf="employeeForm.dob.invalid && isSubmitted" class="p-error">
                 <span *ngIf="employeeForm.dob.errors?.required">DOB is Mandatory</span>
             </small>
         </div>
-        <div class="field col-12 md:col-6">
+        <div class="field col-12 md:col-4">
             <label for="email">Email</label>
             <input formControlName="email" id="email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
-        <div class="field col-12 md:col-6">
+        <div class="field col-12 md:col-4">
             <label for="mobile">Mobile</label>
             <input formControlName="mobile" id="mobile" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
             <small *ngIf="employeeForm.mobile.invalid && isSubmitted" class="p-error">
                 <span *ngIf="employeeForm.mobile.errors?.required">Mobile number is Mandatory</span>
             </small>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="title">Job title</label>
+            <input formControlName="title" id="title" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
         <div class="field col-12">
             <label for="address">Address</label>
@@ -69,16 +81,12 @@
             <input formControlName="zip" id="zip" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
         <div class="field col-12 md:col-3">
-            <label for="employeetype">Employee type</label>
-            <p-dropdown [options]="typesarr" formControlName="employeetype" class="text-base surface-overlay p-2 border-1 border-solid" [editable]="true" class="w-full"  id="employeetype" placeholder="Select Employee Type" optionLabel="name" [showClear]="true" >
-            </p-dropdown>
-            <small *ngIf="employeeForm.employeetype.invalid && isSubmitted" class="p-error">
-                <span *ngIf="employeeForm.employeetype.errors?.required">Type is Mandatory</span>
-            </small>
+            <label for="paymentmode">Payment Mode</label>
+            <input formControlName="paymentmode" id="paymentmode" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
         <div class="field col-12 md:col-3">
             <label for="salary">Salary</label>
-            <input formControlName="salary" id="salary" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            <input formControlName="salary" id="salary" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
         <div class="field col-12 md:col-3">
             <label for="salary">PF</label>
@@ -88,18 +96,22 @@
             <label for="cash">Cash Advance</label>
             <input formControlName="cashadvance" id="cash" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-3">
+            <label for="accountname">Account Name</label>
+            <input formControlName="accountname" id="accountname" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+        </div>
+        <div class="field col-12 md:col-3">
             <label for="bank">Bank</label>
             <input formControlName="bank" id="bank" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-3">
             <label for="account">Account No</label>
             <input formControlName="account" id="account" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
         </div>
-        <div class="field col-12 md:col-4">
+        <div class="field col-12 md:col-3">
             <label for="ifsc">IFSC Code</label>
             <input formControlName="ifsccode" id="ifsc" type="number" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-        </div>
+        </div> 
 </div>
 </form>
 </div>

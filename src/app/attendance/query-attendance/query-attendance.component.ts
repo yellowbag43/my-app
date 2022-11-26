@@ -35,7 +35,6 @@ export class QueryAttendanceComponent implements OnInit {
       if ( response.status ) {
         this.employees = response.employees;
 
-        console.log(JSON.stringify(this.employees))
         this.addMessage(true, "Employees Fetched Successfully!")
       }
       err=>{ console.error("Error "+ response.message);
@@ -68,6 +67,7 @@ export class QueryAttendanceComponent implements OnInit {
         {
           let la: any[];
           la=response.attendance[0]
+          console.log("query fetched "+JSON.stringify(la))
           this.attendance= [{ date: '2022-11-02', type: 'dd'}]
           this.attendance.pop()
 

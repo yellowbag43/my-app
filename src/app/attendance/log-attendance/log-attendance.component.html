@@ -1,32 +1,75 @@
 <p-toast></p-toast>
-<p-card *ngIf="!date_ready" >
-        <div class="grid p-fluid align-content-center justify-content-center">
+<div class="surface-ground mt-1 border-round px-2 py-3 md:px-2 lg:px-4">
+
+<p-card  *ngIf="!isBulk && !isIndividual">
+    <h4>Log Attendance</h4>
+   <div class="grid p-fluid align-content-center justify-content-center">
         <div class="field col-12 md:col-4">
             <p-calendar [(ngModel)]="ngdate" class="ml-5" dateFormat="yy-mm-dd" inputId="dateformat" placeholder="Date"></p-calendar>
         </div>   
-        </div>  
-        <div class="grid p-fluid justify-content-center">
-
+    </div> 
+    <div class="grid p-fluid justify-content-center">
         <div class="field col-12 md:col-4">
-            <button (click)="logattendance()" pButton pRipple type="button" label="Log attendance" 
+            <button (click)="logBulk()" pButton pRipple type="button" icon="pi pi-users" label="Bulk attendance" 
+                class="p-button-raised p-button-secondary"></button>
+                <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
+                <label for="binary">Default set to Absent</label>
+                </div>
+    </div> 
+    <div class="grid p-fluid justify-content-center">
+        <div class="field col-12 md:col-4">
+            <button (click)="logSingle()" pButton pRipple type="button" icon="pi pi-user" label="Single attendance" 
                 class="p-button-raised p-button-secondary"></button>
         </div>
     </div> 
 </p-card>
-<div *ngIf="date_ready" class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+</div>
+
+<div class="surface-ground mt-1 border-round px-2 py-3 md:px-2 lg:px-4">
+    <p-panel *ngIf="isIndividual" header="Employee attendance" >
+    <div class="grid p-fluid align-content-center justify-content-center">
     <div  class="card">
-        <p-table [value]="alistObj" editMode="row" [tableStyle]="{'min-width': '50rem'}"
-         styleClass="p-datatable-sm">
-            <ng-template pTemplate="caption">
-                <button pButton pRipple type="button" label={{displayDate()}} class="p-button-text p-button-plain"></button>           
-                <button (click)="date_ready=false" icon="pi pi-arrow-circle-left" pButton pRipple type="button" label=".." class="p-button-text p-button-plain"></button>           
-            </ng-template>
+
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-4">
+            <p-calendar [(ngModel)]="ngdate" class="ml-5" dateFormat="yy-mm-dd" inputId="dateformat" placeholder="Date"></p-calendar>
+        </div>  
+        <div class="field col-12 mt-4 md:col-4">
+            <p-autoComplete  [(ngModel)]="selectedEmployee" [suggestions]="filteredEmployees" (completeMethod)="filterEmployee($event)"
+                              field="name" [minLength]="1" placeholder="Select Employee"  [dropdown]="true"></p-autoComplete>
+        </div>
+        <div class="field col-12 mt-4 md:col-4">
+            <p-autoComplete  [(ngModel)]="selectedAttendance" [suggestions]="filteredAttendances" (completeMethod)="filterAttendance($event)"
+                              field="name" [minLength]="1" placeholder="Select Attendance"  [dropdown]="true"></p-autoComplete>
+        </div>
+    </div>
+</div>
+</div>
+</p-panel>
+</div>
+<div *ngIf="isBulk" class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+    <div  class="card">
+    <p-table 
+        [value]="alistObj" #dt responsiveLayout="scroll"
+        [paginator]="true"     [rows]="10"  [showCurrentPageReport]="true"
+        [filterDelay]="0" [globalFilterFields]="['name','category']">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" 
+                    (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+                    placeholder="Search" />
+            </span>
+            Attendance for     :{{displayDate()}}
+        </div>
+    </ng-template>
 
         <ng-template pTemplate="header">
             <tr>
-                <th style="width:20%">Name</th>
-                <th style="width:20%">Category</th>
-                <th style="width:20%">Attendance</th>
+                <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="category">Category<p-sortIcon field="category"></p-sortIcon></th>
+                <th>Attendance</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-aobj>
@@ -50,14 +93,22 @@
         </ng-template>        </p-table>
     </div>
 </div>
-<div *ngIf="date_ready" class="formgrid grid border-blue-200 justify-content-center">
+<div *ngIf="isBulk || isIndividual" class="formgrid grid border-blue-200 justify-content-center">
+    
     <div class="field col-12 md:col-2">
         <!-- <button (click)="onSave()" type="button" class="text-white bg-green-700 border-red-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">Save</button> -->
         <button (click)="saveAttendance()" pButton pRipple type="button" label="Save" class="p-button-raised p-button-success p-button-text w-full "></button>
     </div>
     <div class="field col-12 md:col-2">
         <!-- <button (click)="onSave()" type="button" class="text-white bg-green-700 border-red-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">Save</button> -->
-        <button (click)="onExit()" pButton pRipple type="button" label="Cancel" class="p-button-raised p-button-danger p-button-text justify-content-end w-full"></button>
+        <button (click)="onCancel()" pButton pRipple type="button" label="Cancel" class="p-button-raised p-button-danger p-button-text justify-content-end w-full"></button>
+    </div>
+</div>
+
+<div *ngIf="!isBulk && !isIndividual" class="formgrid grid border-blue-200 justify-content-center">
+    <div class="field col-12 md:col-2">
+        <!-- <button (click)="onSave()" type="button" class="text-white bg-green-700 border-red-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">Save</button> -->
+        <button (click)="onExit()" pButton pRipple type="button" label="Close" class="p-button-raised p-button-danger p-button-text justify-content-end w-full"></button>
     </div>
 </div>
 

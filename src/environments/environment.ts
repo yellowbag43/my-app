@@ -4,13 +4,13 @@
 
 export const environment = {
   production: false,
-  apiUserURL: "http://localhost:4005/mk-api/v1/user/",
-  apiPassURL: "http://localhost:4005/mk-api/v1/password/",
-  apiEmployeeURL: "http://localhost:4005/mk-api/v1/employee/",
-  apiJobURL: "http://localhost:4005/mk-api/v1/job/",
-  apiJoblogURL: "http://localhost:4005/mk-api/v1/joblog/",
-  apiAttendanceURL: "http://localhost:4005/mk-api/v1/attendance/",
-  apiReportsURL: "http://localhost:4005/mk-api/v1/reports/"
+  apiUserURL: "http://localhost:80/mk-api/v1/user/",
+  apiPassURL: "http://localhost:80/mk-api/v1/password/",
+  apiEmployeeURL: "http://localhost:80/mk-api/v1/employee/",
+  apiJobURL: "http://localhost:80/mk-api/v1/job/",
+  apiJoblogURL: "http://localhost:80/mk-api/v1/joblog/",
+  apiAttendanceURL: "http://localhost:80/mk-api/v1/attendance/",
+  apiReportsURL: "http://localhost:80/mk-api/v1/reports/"
 
 };
 

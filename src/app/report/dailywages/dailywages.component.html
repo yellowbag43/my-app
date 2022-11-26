@@ -1,0 +1,19 @@
+<p-toast></p-toast>
+<div class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+
+<p-panel header="Daily Wages Staff Reports">
+    <div  class="surface-ground mt-1 border-round px-4 py-5 md:px-6 lg:px-8">
+        <div class="formgrid grid border-blue-200 justify-content-center">
+            <div class="field col-12 md:col-3">
+                <p-calendar (onSelect)="isdownload=false"  [(ngModel)]="selectedMonth" view="month" dateFormat="mm/yy" 
+                            placeholder="Select Month" [readonlyInput]="true" inputId="monthpicker"></p-calendar>
+            </div>
+            <div *ngIf="!isdownload" class="field col-12 md:col-3">
+                <button  (click)="queryReport()" pButton pRipple type="button" label="Generate Report" icon="pi pi-book" class="p-button-raised p-button-primary p-button-text w-full "></button>
+            </div>
+            <div *ngIf="isdownload" class="field col-12 md:col-3">
+                <button  (click)="downloadReport()" pButton pRipple type="button" label="Download" icon="pi pi-download" class="p-button-raised p-button-primary p-button-text w-full "></button>
+            </div>
+        </div>
+    </div>
+</p-panel>

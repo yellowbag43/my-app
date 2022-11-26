@@ -17,10 +17,6 @@ export class EmployeeserviceService {
     return this.http.post<any>(`${this.apiEmployeeURL}/add`, newemployee);
   }
 
-  getEmployeeTypes(): Observable<any> {
-    return this.http.get<any>(`${this.apiEmployeeURL}/getcategory`);
-  }
-
   getAllEmployees(): Observable<any> {
     return this.http.get<any>(`${this.apiEmployeeURL}all`);
   }
@@ -35,6 +31,22 @@ export class EmployeeserviceService {
 
   deleteEmployee(employee : Employee): Observable<any> {
     return this.http.put<any>(`${this.apiEmployeeURL}/amendstatus`, employee);
+  }
+
+  getEmployeeTypes(): Observable<any> {
+    return this.http.get<any>(`${this.apiEmployeeURL}/getcategory`);
+  }
+
+  addNewEmployeeType(newemployeetype : any): Observable<any> {
+    return this.http.post<any>(`${this.apiEmployeeURL}/addemployeecategory`, newemployeetype);
+  }
+
+  amendEmployeeType(updatedemployeetype: any): Observable<any> {
+    return this.http.put<any>(`${this.apiEmployeeURL}amendtype`, updatedemployeetype);
+  }
+
+  deleteEmployeeType(ID : string): Observable<any> {
+    return this.http.delete<any>(`${this.apiEmployeeURL}deletetype/${ID}`);
   }
 
 }

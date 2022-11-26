@@ -10,15 +10,12 @@ import { saveAs } from 'file-saver'
 import { query } from '@angular/animations';
 
 @Component({
-  selector: 'app-jobwise',
-  templateUrl: './jobwise.component.html',
-  styleUrls: ['./jobwise.component.scss']
+  selector: 'app-dailywages',
+  templateUrl: './dailywages.component.html',
+  styleUrls: ['./dailywages.component.scss']
 })
-export class JobwiseComponent implements OnInit {
-  jobs: Job[];
-  selectedJob: Job;
-  filteredJob: Job[];
-  rangeDates: Date[];
+export class DailywagesComponent implements OnInit {
+  selectedMonth: Date;
   downloadfilename: string;
   isdownload : boolean=false;
 
@@ -27,42 +24,28 @@ export class JobwiseComponent implements OnInit {
               private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this._getJobTypes()
-  }
-
-  _getJobTypes() {
-    this.jobtypeService.getAllJobs().subscribe( response=> {
-      if ( response.status )
-         this.jobs=response.jobs;
-    })
-  }
-
-  filterJob(event) {
-    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-    let filtered: any[] = [];
-    let query = event.query;
-    for (let i = 0; i < this.jobs.length; i++) {
-      let jobname = this.jobs[i];
-      if (jobname.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(jobname);
-      }
-    }
-
-    this.filteredJob = filtered;
   }
 
   strDate(dt: Date) {
     return dt.getFullYear()+'-'+Number(dt.getMonth()+1)+'-'+dt.getDate()
   }
 
+  _getDaysInMonth(year, month) {
+    return new Date(year, month+1, 0).getDate();
+  }
+
   queryReport() {
+    const firstDay = new Date(this.selectedMonth.getFullYear(), this.selectedMonth.getMonth(), 1);
+    
+    const lastDay = new Date(this.selectedMonth.getFullYear(), this.selectedMonth.getMonth() + 1, 0);
+
     var queryParams: [string, string , number]
-    queryParams = [this.strDate(this.rangeDates[0]), this.strDate(this.rangeDates[1]), Number(this.selectedJob.ID)]
+    queryParams = [this.strDate(firstDay), this.strDate(lastDay), 0]
     
     const query= {
       query: queryParams,
     }
-    this.reportService.getJoblogbyDate(query).subscribe( response=> {
+    this.reportService.getDailyWagesByDate(query).subscribe( response=> {
         if(response.status){
           this.isdownload=true;
           this.downloadfilename = response.downloadfile;

@@ -5,6 +5,7 @@ export class Employee {
     gender?     : number;
     type?       : number;
     typestr?    : string;
+    title?      : string;
     mobile?     : string;
     email?      : string;
     address?    : string;

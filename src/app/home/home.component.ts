@@ -52,8 +52,9 @@ export class HomeComponent implements OnInit {
                       routerLink: ['reportjobwise']
                   },
                   {
-                      label:'Right',
-                      icon:'pi pi-fw pi-align-right'
+                      label:'Daily Wages Report',
+                      icon:'pi pi-fw pi-align-right',
+                      routerLink: ['reportdailywages']
                   },
                   {
                       label:'Center',
@@ -134,8 +135,25 @@ export class HomeComponent implements OnInit {
                           icon:'pi pi-fw pi-user-plus',
                           routerLink: ['listemployee']
                       },
-                    ]
-                  }
+                      {
+                        label:'Category',
+                        icon:'pi pi-fw pi-user-plus',
+                        routerLink: ['listemployeecategory']
+                    },
+                  ]
+                  },
+                  {
+                    label:'Payment',
+                    icon:'pi pi-fw pi-money-bill',
+                    items:[
+                    {
+                        label:'Settings',
+                        icon:'pi pi-fw pi-cog',
+                        routerLink: ['settingspayment']
+                    },
+                ]
+                }
+
               ]
           },
           {

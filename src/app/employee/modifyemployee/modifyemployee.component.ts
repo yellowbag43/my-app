@@ -14,7 +14,7 @@ interface Type { name: string, id: number }
   styleUrls: ['./modifyemployee.component.scss']
 })
 export class ModifyemployeeComponent implements OnInit {
-  employeeObj : Employee;
+  employeeObj : any;
   isModify    : boolean=false;
 
   allemp_types        : Employeetype[]=[];

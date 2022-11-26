@@ -38,6 +38,7 @@ export class AddemployeeComponent implements OnInit {
       dob         : ['', [Validators.required]],
       gender      : ['', [Validators.required]],
       employeetype: ['', [Validators.required]],
+      title       : [''],
       email       : [''],
       mobile      : ['', [Validators.required]],
       address     : [''],
@@ -46,7 +47,9 @@ export class AddemployeeComponent implements OnInit {
       zip         : [''],
       pf          : [''],
       bank        : [''],
+      paymentmode : [''],
       salary      : [''],
+      accountname : [''],
       account     : [''],
       ifsccode    : [''],
       cashadvance : [''] 
@@ -62,11 +65,12 @@ export class AddemployeeComponent implements OnInit {
     }
 
     let dob_db: Date = new Date(this.employeeForm.dob.value);
-      const newemployee : Employee = {
+      const newemployee : any = {
         name          : this.employeeForm.name.value,
         dob           : dob_db,
         gender        : this.employeeForm.gender.value,
         type          : this.employeeForm.employeetype.value.id,
+        title         : this.employeeForm.title.value,
         email         : this.employeeForm.email.value,
         mobile        : this.employeeForm.mobile.value,
         address       : this.employeeForm.address.value,
@@ -76,16 +80,21 @@ export class AddemployeeComponent implements OnInit {
         pf            : this.employeeForm.pf.value,
         bankname      : this.employeeForm.bank.value,
         salary        : this.employeeForm.salary.value,
+        paymentmode   : this.employeeForm.paymentmode.value,
         account       : this.employeeForm.account.value,
+        accountname   : this.employeeForm.accountname.value,
         ifsccode      : this.employeeForm.ifsccode.value,
         cashadvance   : this.employeeForm.cashadvance.value
       }
 
       this.employeeService.addNewEmployee(newemployee).subscribe( (x: any)=> {
-        this.result = x;
-        console.log("received "+ this.result.message)
-
-          this.addMessage(this.result.status, this.result.message);          
+           this.result = x;
+           if ( x.status ){
+           console.log("received "+ this.result.message)
+          this.addMessage(this.result.status, this.result.message);   }     
+          else this.addMessage(false, this.result.message)  
+          this.onSaveConfrm();
+          this.form.reset()
           err=>{ console.error("Error "+this.result.message);
                 this.addMessage(false, err);           
            }
@@ -113,15 +122,23 @@ export class AddemployeeComponent implements OnInit {
     this.typesarr = tease;
   }
 
-
-  onCancel() {
+  onSaveConfrm() {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to cancel?',
-      accept: ()=> {
+      message: 'You want to add more Employee?',
+      reject: ()=> {
         this.router.navigate(['/dashboard'])
       }
     })
 
+  }
+
+  onCancel() {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to close?',
+      accept: ()=> {
+        this.router.navigate(['/dashboard'])
+      }
+    })
   }
 
   addMessage(state: boolean, log: string) {
@@ -135,5 +152,4 @@ export class AddemployeeComponent implements OnInit {
   get employeeForm() {
     return this.form.controls;
   }
-
 }

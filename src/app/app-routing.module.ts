@@ -15,6 +15,9 @@ import { QueryAttendanceComponent } from "./attendance/query-attendance/query-at
 import { JobTypesComponent } from "./job/job-types/job-types.component";
 import { JobAddComponent } from "./job/job-add/job-add.component";
 import { JobwiseComponent } from "./report/jobwise/jobwise.component";
+import { EmpCategoryComponent } from "./employee/emp-category/emp-category.component";
+import { SettingsComponent } from "./payment/settings/settings.component";
+import { DailywagesComponent } from "./report/dailywages/dailywages.component";
 
 const routes:Routes = [
     {
@@ -61,7 +64,18 @@ const routes:Routes = [
     },
     {
         path: 'reportjobwise', component: JobwiseComponent
+    },
+    {
+        path: 'listemployeecategory', component: EmpCategoryComponent
+    },
+    {
+        path: 'settingspayment', component: SettingsComponent
+    },
+    {
+        path: 'reportdailywages', component: DailywagesComponent
     }
+
+
 ];
 
 

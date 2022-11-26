@@ -18,8 +18,12 @@ export class ReportsService {
       responseType: 'blob'});
   }
 
-  getAttendancebyDate(query: any): Observable<any> {
+  getJoblogbyDate(query: any): Observable<any> {
     return this.http.post<any>(`${this.apiReportURL}/excelschema`, query);
+  }
+
+  getDailyWagesByDate(query: any): Observable<any> {
+    return this.http.post<any>(`${this.apiReportURL}/dailywages`, query);
   }
 
 }

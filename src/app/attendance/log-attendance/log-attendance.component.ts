@@ -18,11 +18,21 @@ interface alist { name: string, category: string, attendance: string, nameid: nu
   styleUrls: ['./log-attendance.component.scss']
 })
 export class LogAttendanceComponent implements OnInit {
-  employees             : Employee[]=[];
-  attendanceCategories  : AttendanceType[]=[];
+  employees             : any[]=[];
+  selectedEmployee      : any;
+  filteredEmployees     : any[];
+
+  attendanceCategories  : any[]=[];
+  selectedAttendance    : any;
+  filteredAttendances   : any[];
   ngdate                : Date;
-  date_ready            : boolean = false;
+  isBulk                : boolean = false;
+  isIndividual          : boolean = false;
+
   statuses: SelectItem[]=[];
+
+  checked : boolean = false;
+
   alistObj : alist[]=[];
   logdb : Log[]=[];
   aentries: [string, number, number][];
@@ -60,7 +70,7 @@ export class LogAttendanceComponent implements OnInit {
         this.attendanceCategories = response.attendanceTypes;
         this.addMessage(true, "AttendanceCategories Fetched Successfully!")
         this._loadAttendanceTypesDropdown();
-        this._loadAttendanceTable();
+       // this._loadAttendanceTable();
         this.addMessage(true, "LoadAttendanceTable Fetched Successfully!")
       }
       err=>{ console.error("Error "+ response.message);
@@ -72,7 +82,7 @@ export class LogAttendanceComponent implements OnInit {
   _loadAttendanceTypesDropdown()
   {
     this.attendanceCategories.forEach( (value) => {
-      this.statuses.push( { label: value.type, value: value.type})
+      this.statuses.push( { label: value.name, value: value.name})
     })
   }
 
@@ -81,10 +91,14 @@ export class LogAttendanceComponent implements OnInit {
   _loadAttendanceTable() 
   {
     let aname='Unknown';
+    let aval = 0;
+    if ( this.checked) aval = 20;  
+    else aval = 0;
+
+
     this.attendanceCategories.forEach((value) => {
-      if ( value.ID ===0)
-        aname = value.type;
-    })
+      if ( value.ID === aval) aname = value.name;
+     })
 
     this.employees.forEach( (value) => {
       this.alistObj.push( {
@@ -92,14 +106,13 @@ export class LogAttendanceComponent implements OnInit {
         category: value.typestr,
         attendance: aname,
         nameid: value.ID,
-        aid: 0
+        aid: aval
       } ) 
     } )
-
   }
 
-  logattendance() { this.date_ready=true}
-
+  logBulk() { this.isBulk=true; this._loadAttendanceTable()}
+  logSingle() { this.isIndividual=true}
 
   addMessage(state: boolean, log: string) {
     this.messageService.add({
@@ -116,7 +129,7 @@ export class LogAttendanceComponent implements OnInit {
     let id : number = 0;
 
     this.attendanceCategories.forEach((value) => {
-      if ( value.type === aval)
+      if ( value.name === aval)
            id = value.ID
     })
     return id;
@@ -131,13 +144,18 @@ export class LogAttendanceComponent implements OnInit {
     this.aentries = [['dummy',1,1]]
     this.aentries.pop();
 
-    let dstr = this.displayDate()//:string = this.ngdate.getFullYear()+'-'+Number(this.ngdate.getMonth()+1)+'-'+this.ngdate.getDate();
+    let dstr = this.displayDate()
     var entobj: [string, number , number]
-    this.alistObj.forEach( (value) => {
-      
-      entobj = [dstr, value.nameid, this._getAttendanceID(value.attendance)]
-      this.aentries.push(entobj)
-    })
+    if ( this.isBulk) {
+      this.alistObj.forEach( (value) => {
+        
+        entobj = [dstr, value.nameid, this._getAttendanceID(value.attendance)]
+        this.aentries.push(entobj)
+      })
+    } else if ( this.isIndividual) {
+        entobj = [ dstr, this.selectedEmployee.ID, this.selectedAttendance.ID]
+        this.aentries.push(entobj)
+    }
 
     const attendance = { attendance: this.aentries}
     console.log("attenddance push"+ JSON.stringify(attendance))
@@ -145,7 +163,41 @@ export class LogAttendanceComponent implements OnInit {
       if( response.status) {
       this.addMessage(true, "Attendance marked for "+this.ngdate)      
       console.log("Attendance Logged for "+this.ngdate)}
+      this.isBulk=false; this.isIndividual=false;
     })
+  }
+
+  filterEmployee(event) {
+    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered: any[] = [];
+    let query = event.query;
+    console.log(this.employees)
+    for (let i = 0; i < this.employees.length; i++) {
+      let emp = this.employees[i];
+      if (emp.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(emp);
+      }
+    }
+    this.filteredEmployees = filtered;
+  }
+
+  filterAttendance(event) {
+    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered: any[] = [];
+    let query = event.query;
+    console.log(this.attendanceCategories)
+    for (let i = 0; i < this.attendanceCategories.length; i++) {
+      let emp = this.attendanceCategories[i];
+      if (emp.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(emp);
+      }
+    }
+    this.filteredAttendances = filtered;
+  }
+
+  onCancel() {
+    this.isBulk = false;
+    this.isIndividual= false;
   }
 
   onExit() {

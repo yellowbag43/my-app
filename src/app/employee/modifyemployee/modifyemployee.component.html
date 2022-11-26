@@ -22,17 +22,21 @@
             </div>
         </div>
         <div class="grid p-fluid">
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-3">
                 <label for="name">Employee Category</label>
                 <p-dropdown [(ngModel)] = "selected_EmpType" [options]="emptypes_arr" optionLabel="name"></p-dropdown>
             </div>
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-3">
                 <label for="email">Email</label>
                 <input [(ngModel)] ="employeeObj.email" type="email" pInputText placeholder="Email" class="w-full">         
             </div>    
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-3">
                 <label for="mobile">Mobile</label>
                 <input [(ngModel)] ="employeeObj.mobile" type="text" pInputText placeholder="Mobile" class="w-full">         
+            </div>    
+            <div class="field col-12 md:col-3">
+                <label for="mobile">Title</label>
+                <input [(ngModel)] ="employeeObj.title" type="text" pInputText placeholder="Job title" class="w-full">         
             </div>    
         </div>
         <div class="grid p-fluid">
@@ -60,29 +64,37 @@
 
     <p-panel header="Other">
         <div *ngIf="employeeObj" class="grid p-fluid">
-            <div class="field col-12 md:col-2">
+            <div class="field col-12 md:col-1">
                 <label for="salary">Salary</label>
-                <input [(ngModel)] ="employeeObj.salary" type="text" pInputText placeholder="Salary" [disabled]="true" class="w-full">         
+                <input [(ngModel)] ="employeeObj.salary" type="text"  [disabled]="true" class="w-full">         
             </div>
-            <div class="field col-12 md:col-2">
-                <label for="pf">Profident Fund (PF)</label>
-                <input [(ngModel)] ="employeeObj.pf" type="text" pInputText placeholder="pf" [disabled]="true" class="w-full">         
+            <div class="field col-12 md:col-1">
+                <label for="pf">PF</label>
+                <input [(ngModel)] ="employeeObj.pf" type="text"  [disabled]="true" class="w-full">         
+            </div>    
+            <div class="field col-12 md:col-1">
+                <label for="cash">Mode</label>
+                <input [(ngModel)] ="employeeObj.paymentmode" type="text"  [disabled]="true" class="w-full">         
+            </div>    
+            <div class="field col-12 md:col-1">
+                <label for="cash">Advance</label>
+                <input [(ngModel)] ="employeeObj.cashadvance" type="text"  [disabled]="true" class="w-full">         
             </div>    
             <div class="field col-12 md:col-2">
-                <label for="cash">Cash Advance</label>
-                <input [(ngModel)] ="employeeObj.cashadvance" type="text" pInputText placeholder="cash" [disabled]="true" class="w-full">         
+                <label for="accountname">Acc Name</label>
+                <input [(ngModel)] ="employeeObj.accountname" type="text"  [disabled]="true" class="w-full">         
             </div>    
             <div class="field col-12 md:col-2">
                 <label for="bank">Bank</label>
-                <input [(ngModel)] ="employeeObj.bankname" type="text" pInputText placeholder="Bank" [disabled]="true" class="w-full">         
+                <input [(ngModel)] ="employeeObj.bankname" type="text"   [disabled]="true" class="w-full">         
             </div>
             <div class="field col-12 md:col-2">
                 <label for="account">Account Number</label>
-                <input [(ngModel)] ="employeeObj.account" type="text" pInputText placeholder="account number" [disabled]="true" class="w-full">         
+                <input [(ngModel)] ="employeeObj.account" type="text"   [disabled]="true" class="w-full">         
             </div>    
             <div class="field col-12 md:col-2">
                 <label for="ifsc">IFSC Code</label>
-                <input [(ngModel)] ="employeeObj.ifsccode" type="text" pInputText placeholder="IFSC Code"  [disabled]="true" class="w-full">         
+                <input [(ngModel)] ="employeeObj.ifsccode" type="text"    [disabled]="true" class="w-full">         
             </div>    
         </div>
     </p-panel>
