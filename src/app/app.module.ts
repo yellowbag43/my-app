@@ -24,9 +24,7 @@ import { JobTypesComponent } from './job/job-types/job-types.component';
 import { JobAddComponent } from './job/job-add/job-add.component';
 import { JobwiseComponent } from './report/jobwise/jobwise.component';
 import { EmpCategoryComponent } from './employee/emp-category/emp-category.component';
-import { SettingsComponent } from './payment/settings/settings.component';
 import { DailywagesComponent } from './report/dailywages/dailywages.component';
-import { CashAdvanceComponent } from './payment/cash-advance/cash-advance.component';
 
 @NgModule({
   declarations: [
@@ -47,9 +45,7 @@ import { CashAdvanceComponent } from './payment/cash-advance/cash-advance.compon
     JobAddComponent,
     JobwiseComponent,
     EmpCategoryComponent,
-    SettingsComponent,
     DailywagesComponent,
-    CashAdvanceComponent
   ],
   imports: [
     AppRoutingModule,
