@@ -26,5 +26,10 @@ export class ReportsService {
     return this.http.post<any>(`${this.apiReportURL}/dailywages`, query);
   }
 
+  getSalaryReport(query: any): Observable<any> {
+    return this.http.post<any>(`${this.apiReportURL}/salary`, query);
+  }
+  
+
 }
 

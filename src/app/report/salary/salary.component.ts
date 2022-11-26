@@ -26,6 +26,9 @@ export class SalaryComponent implements OnInit {
   selectedCategory: any;
   filteredCategory: any[];
 
+  paymentmode: string;
+  pfchoice: string;
+
   constructor(private reportService : ReportsService,
               private employeeService: EmployeeserviceService,
               private messageService: MessageService) { }
@@ -71,13 +74,18 @@ export class SalaryComponent implements OnInit {
     
     const lastDay = new Date(this.selectedMonth.getFullYear(), this.selectedMonth.getMonth() + 1, 0);
 
-    var queryParams: [string, string , number]
-    queryParams = [this.strDate(firstDay), this.strDate(lastDay), 0]
-    
+    var queryParams: [string, string, number, string, string];//fromdate, todate, emp-category, paymentmode]
+ 
+    queryParams = [this.strDate(firstDay),   //From Date
+                   this.strDate(lastDay),   //To Date
+                   this.selectedCategory.ID, //Employee Category
+                   this.paymentmode,
+                  this.pfchoice]; //Payment mode
+
     const query= {
       query: queryParams,
     }
-    this.reportService.getDailyWagesByDate(query).subscribe( response=> {
+    this.reportService.getSalaryReport(query).subscribe( response=> {
         if(response.status){
           this.isdownload=true;
           this.downloadfilename = response.downloadfile;
