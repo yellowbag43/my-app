@@ -29,7 +29,7 @@ export class TransactionsService {
   }
 
   reconcileTransaction(transaction : any): Observable<any> {
-    return this.http.put<any>(`${this.apiTransactionURL}/amend`, transaction);
+    return this.http.put<any>(`${this.apiTransactionURL}/reconcile`, transaction);
   }
 
 }

@@ -28,6 +28,7 @@ export class SalaryComponent implements OnInit {
 
   paymentmode: string;
   pfchoice: string;
+  isSubmitted : boolean = false;
 
   constructor(private reportService : ReportsService,
               private employeeService: EmployeeserviceService,
@@ -70,8 +71,11 @@ export class SalaryComponent implements OnInit {
   }
 
   queryReport() {
+    this.isSubmitted = true;
+    if ( !this.selectedCategory || !this.selectedMonth || !this.pfchoice || !this.paymentmode)
+      return;
+
     const firstDay = new Date(this.selectedMonth.getFullYear(), this.selectedMonth.getMonth(), 1);
-    
     const lastDay = new Date(this.selectedMonth.getFullYear(), this.selectedMonth.getMonth() + 1, 0);
 
     var queryParams: [string, string, number, string, string];//fromdate, todate, emp-category, paymentmode]
@@ -88,8 +92,8 @@ export class SalaryComponent implements OnInit {
     this.reportService.getSalaryReport(query).subscribe( response=> {
         if(response.status){
           this.isdownload=true;
-          this.downloadfilename = response.downloadfile;
-          this.addMessage(true, 'File available for download');
+          this.downloadfilename = response.message;
+          this.addMessage(true, response.message);
         }else
           this.addMessage(false, response.message);
       })
@@ -108,6 +112,14 @@ export class SalaryComponent implements OnInit {
         URL.revokeObjectURL(objectUrl);
         this.addMessage(true, "File Downloaded Successfully")
     })
+  }
+
+  regenerate() {
+    this.isdownload=false;
+    this.selectedCategory=null;
+    this.selectedMonth=null;
+    this.paymentmode='';
+    this.pfchoice=null;
   }
 
   addMessage(state: boolean, log: string) {

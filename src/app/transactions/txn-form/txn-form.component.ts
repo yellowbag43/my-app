@@ -80,7 +80,7 @@ export class TxnFormComponent implements OnInit {
         la.forEach( (value) => {
             let tmp = new Date(value.txndate);
             let txt = tmp.getDate()+'-'+Number(tmp.getMonth()+1)+'-'+tmp.getFullYear()
-            this.alltransanctions.push({ ID: value.ID, txndate: txt, amount: value.amount, txntype: value.typestr })
+            this.alltransanctions.push({ ID: value.ID, txndate: txt, amount: value.amount, txntype: value.typestr, txntypeid: value.txntype })
         })
         this.txnAvailable=true;
       }else this.txnAvailable=false;
@@ -130,9 +130,9 @@ export class TxnFormComponent implements OnInit {
   }
 
   reconcileTxn(txn: any) {
-    var txnobj: [number , number]
+    var txnobj: [number , number, number, number] //txnType , EmployeeID, AMount
     console.log("Transaction ID "+JSON.stringify(txn))
-    txnobj = [txn.ID, 0]
+    txnobj = [txn.txntypeid, this.selectedEmployee.ID, txn.amount, txn.ID]
 
     const txnquery = {
       query : txnobj
