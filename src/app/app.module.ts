@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppPrimengModule } from './app-custom-material/app.primeng.module';
@@ -27,6 +27,9 @@ import { EmpCategoryComponent } from './employee/emp-category/emp-category.compo
 import { DailywagesComponent } from './report/dailywages/dailywages.component';
 import { TxnFormComponent } from './transactions/txn-form/txn-form.component';
 import { SalaryComponent } from './report/salary/salary.component';
+import { MyShellComponent } from './my-shell/my-shell.component';
+import { JwtInterceptor } from './services/jwt.interceptor';
+import { UserCategoryComponent } from './sign/user-category/user-category.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,8 @@ import { SalaryComponent } from './report/salary/salary.component';
     DailywagesComponent,
     TxnFormComponent,
     SalaryComponent,
+    MyShellComponent,
+    UserCategoryComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -61,7 +66,8 @@ import { SalaryComponent } from './report/salary/salary.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [UserserviceService],
+  providers: [UserserviceService,
+      {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

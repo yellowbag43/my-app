@@ -19,16 +19,21 @@ import { EmpCategoryComponent } from "./employee/emp-category/emp-category.compo
 import { DailywagesComponent } from "./report/dailywages/dailywages.component";
 import { TxnFormComponent } from "./transactions/txn-form/txn-form.component";
 import { SalaryComponent } from "./report/salary/salary.component";
+import { MyShellComponent } from "./my-shell/my-shell.component";
+import { AuthGuard } from "./services/auth-guard.service";
+import { UserCategoryComponent } from "./sign/user-category/user-category.component";
 
 const routes:Routes = [
-    {
-        path: 'login', component: LoginComponent
-    },
+{
+    path: 'login', component: LoginComponent
+},
+{
+    path:'',
+    component: MyShellComponent,
+    canActivate: [AuthGuard],
+    children: [
     {
         path: 'dashboard', component: DashboardComponent
-    },
-    {
-        path: '', component: DashboardComponent
     },
     {
         path: 'jobadd',  component: JobAddComponent
@@ -41,6 +46,9 @@ const routes:Routes = [
     },
     {
         path: 'modifyuser', component: ModifyuserComponent
+    },
+    {
+        path: 'usercategory', component: UserCategoryComponent
     },
     {
         path: 'changepassword', component: ChangepasswordComponent
@@ -78,8 +86,8 @@ const routes:Routes = [
     {
         path: 'salaries', component: SalaryComponent
     }
-
-
+    ]
+}
 ];
 
 

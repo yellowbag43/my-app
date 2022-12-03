@@ -23,6 +23,7 @@ import {DividerModule} from 'primeng/divider';
 import {ToolbarModule} from 'primeng/toolbar';
 import {PanelModule} from 'primeng/panel';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [],
@@ -47,7 +48,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     RadioButtonModule,
     ChipModule,
     PanelModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    SelectButtonModule
   ],
   exports: [
     CommonModule,
@@ -71,7 +73,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     ChipModule,
     DividerModule,
     PanelModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    SelectButtonModule
   ],
   providers: [MessageService, ConfirmationService],
 

@@ -16,6 +16,7 @@ interface Type { name: string, id: number }
 export class ModifyemployeeComponent implements OnInit {
   employeeObj : any;
   isModify    : boolean=false;
+  isEditPayment : boolean=false;
 
   allemp_types        : Employeetype[]=[];
   emptypes_arr        : Type[]=[];
@@ -96,7 +97,6 @@ export class ModifyemployeeComponent implements OnInit {
   OnSave() {
     this.employeeObj.type = this.selected_EmpType.id;
     this.employeeObj.gender = this.selected_GenderType.id;
-    console.log("email "+ this.employeeObj.email)
     this.employeeService.amendEmployee(this.employeeObj).subscribe( response=> {
       if ( response.status ) {
         this.addMessage(true, "Employee Updated Successfully!")
@@ -112,6 +112,9 @@ export class ModifyemployeeComponent implements OnInit {
     this.router.navigate(['listemployee'])
   }
 
+  onEditPayment() {
+    this.isEditPayment=true;
+  }
   addMessage(state: boolean, log: string) {
     this.messageService.add({
       severity: state ? 'success' : 'error',

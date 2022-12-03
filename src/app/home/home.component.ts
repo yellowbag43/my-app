@@ -1,22 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import { Router, RouterLink  } from '@angular/router';
+import { LocalstorageService } from '../services/localstorage.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  
+  constructor(private router : Router, 
+              private localStorage : LocalstorageService) { }
 
-  constructor(private router : Router) { }
-
-
+  exit: boolean=false;
   items: MenuItem[];
  
   home() {
-    this.router.navigate([''] )     
+    this.router.navigate(['/dashboard'] )     
   }
-
+ 
+ 
   ngOnInit() {
       this.items = [
           {
@@ -46,7 +50,7 @@ export class HomeComponent implements OnInit {
               label:'Reports',
               icon:'pi pi-fw pi-pencil',
               items:[
-                  {
+                {
                       label:'Job Wise',
                       icon:'pi pi-fw pi-align-left',
                       routerLink: ['reportjobwise']
@@ -80,8 +84,17 @@ export class HomeComponent implements OnInit {
                   {
                       label:'Modify',
                       icon:'pi pi-fw pi-user-edit',
-                      routerLink: ['modifyuser']
-
+                      items:[
+                        {
+                            label:'Users',
+                            icon:'pi pi-fw pi-user-plus',
+                            routerLink: ['modifyuser']
+                        },
+                        {
+                            label:'Category',
+                            icon:'pi pi-fw pi-user-plus',
+                            routerLink: ['usercategory']
+                        }]
                   },
                   {
                     label:'Change Password',
@@ -153,10 +166,12 @@ export class HomeComponent implements OnInit {
           {
               label:'Quit',
               icon:'pi pi-fw pi-power-off',
-              routerLink: ['login']
+              command: ()=> {
+                this.localStorage.removeKey();
+                this.router.navigate(['login'])            
+              }
           }
       ];
   }
-
 }
 

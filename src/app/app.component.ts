@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import { HomescreenService } from './services/homescreen.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,19 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class AppComponent {
   title = 'my-app';
-
-  constructor(private primengConfig: PrimeNGConfig) {}
+  valid: boolean = true;
+  
+  constructor(private primengConfig: PrimeNGConfig,
+              private homeScreen: HomescreenService) {}
 
   ngOnInit() {
       this.primengConfig.ripple = true;
-  }
+      this.valid = this.homeScreen.getScreenFlag();
+    }
 
+
+  getScreenStatus() {
+//    console.log("Screen is "+this.homeScreen.getScreenFlag())
+    return this.homeScreen.getScreenFlag();
+  }
 }

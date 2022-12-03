@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportsService } from 'src/app/services/reports.service';
 import { JobsserviceService } from 'src/app/services/jobsservice.service';
+import { EmployeeserviceService } from 'src/app/services/employeeservice.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
@@ -18,13 +19,16 @@ export class JobwiseComponent implements OnInit {
   jobs: Job[];
   selectedJob: Job;
   filteredJob: Job[];
+
   rangeDates: Date[];
   downloadfilename: string;
   isdownload : boolean=false;
 
   constructor(private reportService : ReportsService,
               private jobtypeService: JobsserviceService,
-              private messageService: MessageService) { }
+              private employeeService: EmployeeserviceService,
+              private messageService: MessageService) { 
+  }
 
   ngOnInit(): void {
     this._getJobTypes()
@@ -36,6 +40,7 @@ export class JobwiseComponent implements OnInit {
          this.jobs=response.jobs;
     })
   }
+
 
   filterJob(event) {
     //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
@@ -70,8 +75,24 @@ export class JobwiseComponent implements OnInit {
         }else
           this.addMessage(false, response.message);
       })
-
   }
+
+  // queryDirectJobReport() {
+  //   var queryParams: [string, string , number]
+  //   queryParams = [this.strDate(this.rangeDates[0]), this.strDate(this.rangeDates[1]), Number(this.selectedEmptype.ID)]
+    
+  //   const query= {
+  //     query: queryParams,
+  //   }
+  //   this.reportService.getJoblogbyDate(query).subscribe( response=> {
+  //       if(response.status){
+  //         this.isdownload=true;
+  //         this.downloadfilename = response.downloadfile;
+  //         this.addMessage(true, 'File available for download');
+  //       }else
+  //         this.addMessage(false, response.message);
+  //     })
+  // }
 
   downloadReport() {
     this.isdownload=true;

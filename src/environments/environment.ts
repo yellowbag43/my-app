@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiURL: "http://localhost:80/mk-api/v1/",
   apiUserURL: "http://localhost:80/mk-api/v1/user/",
   apiPassURL: "http://localhost:80/mk-api/v1/password/",
   apiEmployeeURL: "http://localhost:80/mk-api/v1/employee/",
@@ -11,7 +12,8 @@ export const environment = {
   apiJoblogURL: "http://localhost:80/mk-api/v1/joblog/",
   apiAttendanceURL: "http://localhost:80/mk-api/v1/attendance/",
   apiReportsURL: "http://localhost:80/mk-api/v1/reports/",
-  apiTransactionsURL : "http://localhost:80/mk-api/v1/transactions/"
+  apiTransactionsURL : "http://localhost:80/mk-api/v1/transactions/",
+  apiAuthenticationURL : "http://localhost:80/mk-api/v1/authentication/"
 };
 
 /*

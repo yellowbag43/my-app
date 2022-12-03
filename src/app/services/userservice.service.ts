@@ -15,11 +15,19 @@ export class UserserviceService {
   constructor(private http: HttpClient) {}
 
   addNewUser(newuser : User): Observable<any> {
-    return this.http.post<any>(`${this.apiUserURL}/register`, newuser);
+    return this.http.post<any>(`${this.apiUserURL}/add`, newuser);
   }
 
   amendUser(updatedjob: User): Observable<any> {
     return this.http.put<any>(`${this.apiUserURL}amend`, updatedjob);
+  }
+
+  addNewUserCategory(category : any): Observable<any> {
+    return this.http.post<any>(`${this.apiUserURL}/addcategory`, category);
+  }
+
+  amendUserCategory(category: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUserURL}amendcategory`, category);
   }
 
   getUserTypes(): Observable<any> {
@@ -36,6 +44,10 @@ export class UserserviceService {
 
   deleteUser(userID): Observable<any> {
     return this.http.delete<any>(`${this.apiUserURL}/${userID.ID}`);
+  }
+
+  deleteUserCategory(categoryID): Observable<any> {
+    return this.http.delete<any>(`${this.apiUserURL}category/${categoryID.ID}`);
   }
 
   changePassword(newpasswd : any): Observable<any> {

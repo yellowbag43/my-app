@@ -19,7 +19,7 @@ export class ReportsService {
   }
 
   getJoblogbyDate(query: any): Observable<any> {
-    return this.http.post<any>(`${this.apiReportURL}/excelschema`, query);
+    return this.http.post<any>(`${this.apiReportURL}/jobwise`, query);
   }
 
   getDailyWagesByDate(query: any): Observable<any> {
@@ -30,6 +30,8 @@ export class ReportsService {
     return this.http.post<any>(`${this.apiReportURL}/salary`, query);
   }
   
-
+  getDirectJobSalary(query: any): Observable<any> {
+    return this.http.post<any>(`${this.apiReportURL}/directsalarycash`, query);
+  }
 }
 
